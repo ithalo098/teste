@@ -1,0 +1,14 @@
+{
+  "name": "lista-tarefas-desktop",
+  "version": "1.0.0",
+  "description": "Trabalho de Desenvolvimento Desktop - Lista de Tarefas com Electron e Bootstrap",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "ithalo098",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^28.2.0"
+  }
+}
