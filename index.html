@@ -56,38 +56,64 @@
 
   <!-- Container principal -->
   <main class="container mb-5">
-    <!-- Linha de cards HUD com contadores no topo -->
+    <!-- Linha de cards HUD no modelo solid-metal/modern-lizard-75 -->
     <div class="row g-3 mb-4" id="painel-estatisticas">
       <div class="col-md-4">
-        <div class="hud-stat-card hud-card-total">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
+        <div class="hud-lizard-wrapper hud-lizard-total">
+          <div class="hud-lizard-card">
+            <div class="d-flex justify-content-between align-items-center mb-2">
               <span class="hud-stat-label">TOTAL NO RADAR</span>
+              <span class="badge bg-secondary-subtle text-light border border-secondary border-opacity-25 px-2 py-0.5 rounded-pill font-monospace" style="font-size: 0.65rem;">
+                <i class="bi bi-hdd-stack me-1"></i>BASE
+              </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-end">
               <div class="hud-stat-num" id="totalQtd">0</div>
+              <i class="bi bi-grid-3x3-gap-fill fs-1 text-white opacity-25"></i>
             </div>
-            <i class="bi bi-grid-3x3-gap-fill fs-1 text-cyan opacity-50"></i>
+            <div class="hud-micro-bar mt-3">
+              <div class="hud-micro-fill bg-white" style="width: 100%;"></div>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="col-md-4">
-        <div class="hud-stat-card hud-card-pendentes">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
+        <div class="hud-lizard-wrapper hud-lizard-pendentes">
+          <div class="hud-lizard-card">
+            <div class="d-flex justify-content-between align-items-center mb-2">
               <span class="hud-stat-label">PENDÊNCIAS ATIVAS</span>
-              <div class="hud-stat-num" id="pendentesQtd">0</div>
+              <span class="badge bg-warning-subtle text-warning border border-warning border-opacity-25 px-2 py-0.5 rounded-pill font-monospace" style="font-size: 0.65rem;">
+                <i class="bi bi-hourglass-split me-1"></i>EM ANDAMENTO
+              </span>
             </div>
-            <i class="bi bi-hourglass-split fs-1 text-warning opacity-50"></i>
+            <div class="d-flex justify-content-between align-items-end">
+              <div class="hud-stat-num text-warning" id="pendentesQtd">0</div>
+              <i class="bi bi-clock-history fs-1 text-warning opacity-25"></i>
+            </div>
+            <div class="hud-micro-bar mt-3">
+              <div class="hud-micro-fill bg-warning" style="width: 70%;"></div>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="col-md-4">
-        <div class="hud-stat-card hud-card-concluidas">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
+        <div class="hud-lizard-wrapper hud-lizard-concluidas">
+          <div class="hud-lizard-card">
+            <div class="d-flex justify-content-between align-items-center mb-2">
               <span class="hud-stat-label">METAS CONCLUÍDAS</span>
-              <div class="hud-stat-num" id="concluidasQtd">0</div>
+              <span class="badge bg-success-subtle text-success border border-success border-opacity-25 px-2 py-0.5 rounded-pill font-monospace" style="font-size: 0.65rem;">
+                <i class="bi bi-check2-circle me-1"></i>FINALIZADAS
+              </span>
             </div>
-            <i class="bi bi-check2-circle fs-1 text-success opacity-50"></i>
+            <div class="d-flex justify-content-between align-items-end">
+              <div class="hud-stat-num text-success" id="concluidasQtd">0</div>
+              <i class="bi bi-check-all fs-1 text-success opacity-25"></i>
+            </div>
+            <div class="hud-micro-bar mt-3">
+              <div class="hud-micro-fill bg-success" style="width: 100%;"></div>
+            </div>
           </div>
         </div>
       </div>

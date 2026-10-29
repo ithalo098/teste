@@ -13,6 +13,15 @@ function atualizarIndicadores() {
   if (elTotal) elTotal.innerText = stats.total;
   if (elPend) elPend.innerText = stats.pendentes;
   if (elConc) elConc.innerText = stats.concluidas;
+
+  const pctConc = stats.total > 0 ? Math.round((stats.concluidas / stats.total) * 100) : 0;
+  const pctPend = stats.total > 0 ? Math.round((stats.pendentes / stats.total) * 100) : 0;
+
+  const barConc = document.querySelector('.hud-lizard-concluidas .hud-micro-fill');
+  const barPend = document.querySelector('.hud-lizard-pendentes .hud-micro-fill');
+
+  if (barConc) barConc.style.width = `${pctConc}%`;
+  if (barPend) barPend.style.width = `${pctPend}%`;
 }
 
 function renderizarLista() {

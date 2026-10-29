@@ -656,29 +656,82 @@ body::before {
 }
 
 /* ==============================================================
-   7. CARDS DE ESTATISTICAS HUD NO TOPO (MONOCROMATICO)
+   7. CARDS DE ESTATISTICAS HUD NO TOPO (solid-metal/modern-lizard-75)
    ============================================================== */
-.hud-stat-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 14px;
-  padding: 1.25rem;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+.hud-lizard-wrapper {
+  position: relative;
+  z-index: 1;
 }
 
-.hud-stat-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+.hud-lizard-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  filter: blur(35px);
+  z-index: 0;
+  opacity: 0.35;
+  pointer-events: none;
+  top: 10%;
+  left: 20%;
+}
+
+.hud-lizard-total::before {
+  background: radial-gradient(circle, #38bdf8, transparent 70%);
+}
+
+.hud-lizard-pendentes::before {
+  background: radial-gradient(circle, #f59e0b, transparent 70%);
+}
+
+.hud-lizard-concluidas::before {
+  background: radial-gradient(circle, #10b981, transparent 70%);
+}
+
+.hud-lizard-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(9, 9, 14, 0.85);
+  padding: 1.35rem;
+  box-shadow: inset 1px 1px 4px rgba(255, 255, 255, 0.08), 0 8px 30px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.hud-lizard-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: inset 1px 1px 6px rgba(255, 255, 255, 0.15), 0 14px 40px rgba(0, 0, 0, 0.95);
+}
+
+/* Faixa de brilho angular contínua (solid-metal/modern-lizard-75) */
+.hud-lizard-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 160%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.09), transparent);
+  transform: rotateZ(35deg);
+  filter: blur(18px);
+  animation: lizardShine 8s ease infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hud-stat-num {
   font-family: var(--font-main);
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   font-weight: 800;
   color: #ffffff;
   line-height: 1;
+  letter-spacing: -0.5px;
 }
 
 .hud-stat-label {
@@ -687,6 +740,29 @@ body::before {
   letter-spacing: 1.5px;
   color: var(--text-muted);
   text-transform: uppercase;
+}
+
+.hud-micro-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.hud-micro-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+/* Fallback de compatibilidade */
+.hud-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
 /* Painel de Formulario e Busca */
