@@ -73,13 +73,13 @@ const NEXUS_AI = {
         </form>
       </div>
 
-      <!-- Botao Flutuante da IA no Canto (Spacious74/lazy-dragonfly-64) -->
-      <button id="nexusAiTrigger" class="btn-lazy-dragonfly" title="Abrir Assistente NEXUS AI">
-        <div class="ai-pill-icon">
+      <!-- Botao Flutuante da IA no Canto Futurista -->
+      <button id="nexusAiTrigger" class="btn-nexus-ai-float" title="Abrir Assistente NEXUS AI">
+        <span class="nexus-ai-icon-pulse">
           <i class="bi bi-cpu-fill"></i>
-        </div>
-        <span>NEXUS AI</span>
-        <span class="ai-pulse-dot"></span>
+        </span>
+        <span class="nexus-ai-label">NEXUS AI</span>
+        <span class="nexus-ai-live-badge">2.0</span>
       </button>
     `;
 

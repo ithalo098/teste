@@ -45,8 +45,8 @@ function renderizarLista() {
               <i class="bi bi-shield-check text-white fs-1 opacity-75 mb-3 d-block"></i>
               <h5 class="fw-bold text-white mb-1">Nenhum Registro no Radar</h5>
               <p class="text-secondary small mb-3">Nenhuma tarefa corresponde aos filtros cibernéticos atuais.</p>
-              <button class="btn-lazy-dragonfly btn-sm" onclick="NEXUS_AI.executarSugestaoEstudos()">
-                <div class="ai-pill-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+              <button class="btn-nexus-primary btn-sm" onclick="NEXUS_AI.executarSugestaoEstudos()">
+                <i class="bi bi-lightning-charge-fill me-1"></i>
                 <span>Sugerir Tarefas com IA</span>
               </button>
             </div>

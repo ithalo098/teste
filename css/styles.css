@@ -75,22 +75,26 @@ main,
 }
 
 /* ==============================================================
-   2. BORDAS RGB NOS BOTOES (CHROMA SPECTRUM GLOW)
-   Apenas as bordas brilham com RGB fino; fundo solido preto total
+   2. BOTÕES FUTURISTAS CYBER-NECROMANCER (ULTRA MODERNOS)
+   Estilo Obsidian Glass, specular highlight e glow de alta tecnologia
    ============================================================== */
-.btn-rgb,
+
+/* Botão Primário Principal (Cadastrar no Sistema / Salvar) */
+.btn-nexus-primary,
 .btn-cyber-primary,
-.btn-primary {
+.btn-primary,
+.btn-rgb,
+.btn-lazy-dragonfly.w-100 {
   position: relative;
-  background: #000000 !important;
+  background: linear-gradient(180deg, #161622 0%, #07070b 100%) !important;
   color: #ffffff !important;
-  border-radius: 12px;
-  border: none !important;
-  padding: 0.75rem 1.6rem;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 13px 24px !important;
   font-family: var(--font-main);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.85rem;
-  letter-spacing: 1.8px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   cursor: pointer;
   z-index: 1;
@@ -98,79 +102,110 @@ main,
   align-items: center;
   justify-content: center;
   gap: 10px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 25px rgba(0, 0, 0, 0.85) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
 }
 
-/* Moldura RGB animada fina e precisa */
-.btn-rgb::before,
+.btn-nexus-primary::before,
 .btn-cyber-primary::before,
-.btn-primary::before {
+.btn-primary::before,
+.btn-rgb::before,
+.btn-lazy-dragonfly.w-100::before {
   content: '';
   position: absolute;
-  inset: -1.5px;
-  border-radius: 13.5px;
-  background: conic-gradient(from var(--rgb-angle), #ff0055, #ff9900, #ffff00, #00ff66, #00ffff, #0066ff, #9900ff, #ff00aa, #ff0055);
-  z-index: -1;
-  animation: rgbSpin 4s linear infinite;
-  transition: opacity 0.3s ease;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
 }
 
-/* Desativa blur volumetrico para nao ofuscar o botao inteiro */
-.btn-rgb::after,
+.btn-nexus-primary:hover,
+.btn-cyber-primary:hover,
+.btn-primary:hover,
+.btn-rgb:hover,
+.btn-lazy-dragonfly.w-100:hover {
+  transform: translateY(-2px);
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 12px 30px rgba(0, 0, 0, 0.95), 0 0 20px rgba(255, 255, 255, 0.15) !important;
+}
+
+.btn-nexus-primary:hover::before,
+.btn-cyber-primary:hover::before,
+.btn-primary:hover::before,
+.btn-rgb:hover::before,
+.btn-lazy-dragonfly.w-100:hover::before {
+  left: 100%;
+}
+
+.btn-nexus-primary:active,
+.btn-cyber-primary:active,
+.btn-primary:active,
+.btn-rgb:active,
+.btn-lazy-dragonfly.w-100:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 12px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Desativa pseudo-elementos legados */
+.btn-nexus-primary::after,
 .btn-cyber-primary::after,
-.btn-primary::after {
+.btn-primary::after,
+.btn-rgb::after,
+.btn-lazy-dragonfly::after {
   display: none !important;
 }
 
-.btn-rgb:hover,
-.btn-cyber-primary:hover,
-.btn-primary:hover {
-  transform: translateY(-2px);
-  color: #ffffff !important;
-}
-
-.btn-rgb:hover::before,
-.btn-cyber-primary:hover::before,
-.btn-primary:hover::before {
-  animation-duration: 2s;
-}
-
-.btn-rgb:active,
-.btn-cyber-primary:active,
-.btn-primary:active {
-  transform: translateY(0) scale(0.98);
-}
-
-/* Botao Perigo com Borda RGB avermelhada */
-.btn-cyber-danger,
-.btn-danger {
+/* Botão Compacto / Secundário / Navbar (TEMA) */
+.btn-cyber-nav,
+.btn-lazy-dragonfly.btn-sm {
   position: relative;
-  background: #090607 !important;
+  background: rgba(16, 16, 24, 0.8) !important;
   color: #ffffff !important;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 50, 50, 0.5) !important;
-  padding: 0.5rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 10px !important;
+  padding: 8px 18px !important;
+  font-family: var(--font-main);
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  transition: all 0.25s ease;
-  box-shadow: 0 0 10px rgba(255, 0, 50, 0.25);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  outline: none;
 }
 
-.btn-cyber-danger:hover,
-.btn-danger:hover {
-  background: #1a080c !important;
-  border-color: #ff3355 !important;
-  box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+.btn-cyber-nav::before,
+.btn-lazy-dragonfly.btn-sm::before {
+  display: none !important;
+}
+
+.btn-cyber-nav:hover,
+.btn-lazy-dragonfly.btn-sm:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: #ffffff !important;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
 }
 
-/* ==============================================================
-   3. BOTÃO DA IA (Spacious74/lazy-dragonfly-64)
-   Pill Futurista com Borda RGB Dinâmica, Glassmorphism e Ícone 3D
-   ============================================================== */
+.btn-cyber-nav:active,
+.btn-lazy-dragonfly.btn-sm:active {
+  transform: translateY(0);
+}
+
+/* Botão Flutuante de IA no Canto (NEXUS AI) */
 .nexus-ai-wrapper {
   position: fixed;
   bottom: 24px;
@@ -181,93 +216,102 @@ main,
   align-items: flex-end;
 }
 
-/* Botão Lazy-Dragonfly-64 da IA e Ações Principais */
-.btn-lazy-dragonfly {
+.btn-nexus-ai-float,
+.btn-lazy-dragonfly:not(.w-100):not(.btn-sm) {
   position: relative;
-  background: #000000 !important;
+  background: linear-gradient(135deg, #141420 0%, #06060a 100%) !important;
   color: #ffffff !important;
-  border-radius: 40px;
-  padding: 10px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 50px !important;
+  padding: 12px 22px !important;
   font-family: var(--font-main);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.82rem;
   letter-spacing: 1.8px;
   text-transform: uppercase;
   cursor: pointer;
-  z-index: 1;
+  z-index: 1050;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
-  border: none !important;
+  gap: 10px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
   text-decoration: none;
+  outline: none;
 }
 
-/* Borda RGB da Pill - fina e nitida */
-.btn-lazy-dragonfly::before {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: 41.5px;
-  background: conic-gradient(from var(--rgb-angle), #ff0055, #ff9900, #ffff00, #00ff66, #00ffff, #0066ff, #9900ff, #ff00aa, #ff0055);
-  z-index: -1;
-  animation: rgbSpin 4s linear infinite;
-}
-
-/* Sem aura difusa / sem blur que cobre o botao */
-.btn-lazy-dragonfly::after {
+.btn-nexus-ai-float::before,
+.btn-lazy-dragonfly:not(.w-100):not(.btn-sm)::before {
   display: none !important;
 }
 
-.btn-lazy-dragonfly:hover {
-  transform: scale(1.03) translateY(-2px);
+.btn-nexus-ai-float:hover,
+.btn-lazy-dragonfly:not(.w-100):not(.btn-sm)::hover {
+  transform: translateY(-4px) scale(1.04);
+  border-color: #ffffff !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.95), 0 0 20px rgba(255, 255, 255, 0.2) !important;
   color: #ffffff !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.95);
 }
 
-.btn-lazy-dragonfly:hover::before {
-  animation-duration: 2s;
-}
-
-.btn-lazy-dragonfly:active {
-  transform: scale(0.98);
-}
-
-/* Variantes do Botao Lazy Dragonfly */
-.btn-lazy-dragonfly.w-100 {
-  width: 100% !important;
+.nexus-ai-icon-pulse {
+  font-size: 1rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  border-radius: 12px !important;
-  padding: 13px 20px !important;
-  background: #000000 !important;
+  animation: cpuPulse 2.5s infinite;
 }
 
-.btn-lazy-dragonfly.w-100::before {
-  border-radius: 13.5px !important;
-  inset: -1.5px;
+@keyframes cpuPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.92);
+    filter: none;
+  }
 }
 
-.btn-lazy-dragonfly.w-100::after {
-  display: none !important;
+.nexus-ai-live-badge {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 1px 7px;
+  border-radius: 10px;
+  color: #ffffff;
+  font-weight: 700;
 }
 
-.btn-lazy-dragonfly.btn-sm {
-  padding: 6px 16px !important;
-  font-size: 0.72rem !important;
-  letter-spacing: 1.2px !important;
-  gap: 7px !important;
-  border-radius: 30px !important;
-  background: #000000 !important;
+/* Botão Perigo / Expurgar Tarefas */
+.btn-cyber-danger,
+.btn-danger {
+  position: relative;
+  background: rgba(24, 6, 10, 0.85) !important;
+  color: #ff6680 !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 50, 80, 0.35) !important;
+  padding: 0.55rem 1.2rem !important;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 50, 80, 0.15), 0 4px 15px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 
-.btn-lazy-dragonfly.btn-sm::before {
-  border-radius: 31.5px !important;
-  inset: -1.5px;
-}
-
-.btn-lazy-dragonfly.btn-sm::after {
-  display: none !important;
+.btn-cyber-danger:hover,
+.btn-danger:hover {
+  background: #ff1a40 !important;
+  color: #ffffff !important;
+  border-color: #ff1a40 !important;
+  box-shadow: 0 0 20px rgba(255, 26, 64, 0.6) !important;
+  transform: translateY(-2px);
 }
 
 /* ==============================================================
@@ -857,24 +901,33 @@ main,
   border-color: #ff3355 !important;
 }
 
-/* Filtros */
+/* Filtros Cibernéticos Modernos */
 .btn-cyber-filter {
-  background: #08080c;
-  border: 1px solid var(--border-subtle);
-  color: var(--text-muted);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 0.45rem 0.9rem;
-  transition: all 0.2s ease;
+  background: rgba(14, 14, 20, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #8892a4 !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.2px !important;
+  text-transform: uppercase !important;
+  padding: 0.45rem 1rem !important;
+  border-radius: 8px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  backdrop-filter: blur(8px);
 }
 
-.btn-cyber-filter.active,
 .btn-cyber-filter:hover {
-  background: #151520 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
   color: #ffffff !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-1px);
+}
+
+.btn-cyber-filter.active {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 }
 
 /* Badges Monocromaticas com Detalhes Discretos */
