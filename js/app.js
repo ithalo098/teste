@@ -38,19 +38,26 @@ function renderizarLista() {
 
   if (filtradas.length === 0) {
     container.innerHTML = `
-      <div class="cyber-card text-center p-5 border-dashed">
-        <i class="bi bi-shield-check text-cyan fs-1 opacity-75 mb-3 d-block"></i>
-        <h5 class="fw-bold text-cyan mb-1">Nenhum Registro no Radar</h5>
-        <p class="text-secondary small mb-3">Nenhuma tarefa corresponde aos filtros cibernéticos atuais.</p>
-        <button class="btn btn-cyber-primary btn-sm" onclick="NEXUS_AI.executarSugestaoEstudos()">
-          <i class="bi bi-lightning-charge-fill me-1"></i> Sugerir Tarefas com IA
-        </button>
+      <div class="smart-liger-parent">
+        <div class="smart-liger-card">
+          <div class="smart-liger-glass text-center p-5">
+            <div class="smart-liger-content">
+              <i class="bi bi-shield-check text-white fs-1 opacity-75 mb-3 d-block"></i>
+              <h5 class="fw-bold text-white mb-1">Nenhum Registro no Radar</h5>
+              <p class="text-secondary small mb-3">Nenhuma tarefa corresponde aos filtros cibernéticos atuais.</p>
+              <button class="btn-lazy-dragonfly btn-sm" onclick="NEXUS_AI.executarSugestaoEstudos()">
+                <div class="ai-pill-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                <span>Sugerir Tarefas com IA</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     `;
     return;
   }
 
-  // Renderiza cards inspirados em zeeshan_2112/shy-rattlesnake-3
+  // Renderiza todos os cards de atividade no modelo 3D Glassmorphism (Smit-Prajapati/smart-liger-5)
   // com toggle inspirado em Shammy2002/evil-shrimp-6
   // e botoes inspirados em Kabak/unlucky-treefrog-77
   container.innerHTML = filtradas.map(t => {
@@ -62,43 +69,49 @@ function renderizarLista() {
     else if (t.prioridade === 'baixa') prioBadgeClass = 'cyber-badge-baixa';
 
     return `
-      <div class="card card-item-tarefa ${t.feita ? 'tarefa-feita' : ''} prioridade-${t.prioridade}">
-        <div class="d-flex justify-content-between align-items-start gap-3">
-          <!-- Toggle Checkbox Futurista (Shammy2002/evil-shrimp-6) -->
-          <div class="d-flex align-items-center gap-3 flex-grow-1">
-            <label class="cyber-toggle" title="${t.feita ? 'Concluída (Clique para reabrir)' : 'Pendente (Clique para concluir)'}">
-              <input type="checkbox" class="check-feita" data-id="${t.id}" ${t.feita ? 'checked' : ''}>
-              <span class="cyber-slider">
-                <span class="cyber-knob"></span>
-              </span>
-            </label>
+      <div class="smart-liger-parent card-item-tarefa ${t.feita ? 'tarefa-feita' : ''} prioridade-${t.prioridade}">
+        <div class="smart-liger-card">
+          <div class="smart-liger-glass">
+            <div class="smart-liger-content">
+              <div class="d-flex justify-content-between align-items-start gap-3">
+                <!-- Toggle Checkbox Futurista (Shammy2002/evil-shrimp-6) -->
+                <div class="d-flex align-items-center gap-3 flex-grow-1">
+                  <label class="cyber-toggle" title="${t.feita ? 'Concluída (Clique para reabrir)' : 'Pendente (Clique para concluir)'}">
+                    <input type="checkbox" class="check-feita" data-id="${t.id}" ${t.feita ? 'checked' : ''}>
+                    <span class="cyber-slider">
+                      <span class="cyber-knob"></span>
+                    </span>
+                  </label>
 
-            <div class="flex-grow-1">
-              <div class="d-flex align-items-center gap-2 flex-wrap">
-                <h5 class="card-title titulo-txt mb-0 fw-bold">${t.titulo}</h5>
-                ${t.feita ? '<span class="badge bg-success-subtle text-success small py-0 px-2 rounded-pill"><i class="bi bi-check2"></i> FEITA</span>' : ''}
-              </div>
-              ${t.descricao ? `<p class="text-secondary small mb-1 mt-1">${t.descricao}</p>` : ''}
-              <div class="d-flex align-items-center gap-3 mt-2 flex-wrap">
-                <span class="cyber-badge cyber-badge-category">
-                  <i class="bi bi-folder2-open me-1"></i>${nomeCat}
-                </span>
-                <span class="cyber-badge ${prioBadgeClass}">
-                  <i class="bi bi-speedometer2 me-1"></i>${t.prioridade}
-                </span>
-                ${prazoFmt ? `<span class="small text-secondary"><i class="bi bi-clock-history me-1 text-cyan"></i>Prazo: ${prazoFmt}</span>` : ''}
+                  <div class="flex-grow-1">
+                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                      <h5 class="card-title titulo-txt mb-0 fw-bold">${t.titulo}</h5>
+                      ${t.feita ? '<span class="badge bg-success-subtle text-success small py-0 px-2 rounded-pill"><i class="bi bi-check2"></i> FEITA</span>' : ''}
+                    </div>
+                    ${t.descricao ? `<p class="text-secondary small mb-1 mt-1">${t.descricao}</p>` : ''}
+                    <div class="d-flex align-items-center gap-3 mt-2 flex-wrap">
+                      <span class="cyber-badge cyber-badge-category">
+                        <i class="bi bi-folder2-open me-1"></i>${nomeCat}
+                      </span>
+                      <span class="cyber-badge ${prioBadgeClass}">
+                        <i class="bi bi-speedometer2 me-1"></i>${t.prioridade}
+                      </span>
+                      ${prazoFmt ? `<span class="small text-secondary"><i class="bi bi-clock-history me-1 text-cyan"></i>Prazo: ${prazoFmt}</span>` : ''}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Botoes de Acao Sleek (Kabak/unlucky-treefrog-77) -->
+                <div class="d-flex align-items-center gap-1 flex-shrink-0">
+                  <button class="btn-cyber-action btn-editar" data-id="${t.id}" title="Editar Tarefa">
+                    <i class="bi bi-pencil-fill"></i>
+                  </button>
+                  <button class="btn-cyber-action btn-cyber-delete btn-apagar" data-id="${t.id}" title="Excluir Tarefa">
+                    <i class="bi bi-trash3-fill"></i>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-
-          <!-- Botoes de Acao Sleek (Kabak/unlucky-treefrog-77) -->
-          <div class="d-flex align-items-center gap-1 flex-shrink-0">
-            <button class="btn-cyber-action btn-editar" data-id="${t.id}" title="Editar Tarefa">
-              <i class="bi bi-pencil-fill"></i>
-            </button>
-            <button class="btn-cyber-action btn-cyber-delete btn-apagar" data-id="${t.id}" title="Excluir Tarefa">
-              <i class="bi bi-trash3-fill"></i>
-            </button>
           </div>
         </div>
       </div>
