@@ -1,339 +1,305 @@
 /* ==============================================================
-   NEXUS TAREFAS AI - ESTILOS CIBERNETICOS AVANCADOS
-   Inspirados em Uiverse.io:
-   - Fundo: amir_6539/red-duck-82 (Cosmos Cibernético / Grid Espacial)
-   - Cards: zeeshan_2112/shy-rattlesnake-3 (Cyber Tickets com Neon)
-   - Toggles: Shammy2002/evil-shrimp-6 (Glowing Dark Switches)
-   - Botoes: Kabak/unlucky-treefrog-77 (Minimal Sleek Neon Glow)
+   NEXUS TAREFAS - TEMA NECROMANCER (PRETO E BRANCO COM BORDAS RGB)
+   - Fundo: amir_6539/red-duck-82 (Void Escuro Monocromatico com Microgrid)
+   - Botoes: Bordas RGB animadas (Chroma Conic Glow)
+   - Botao IA: Spacious74/lazy-dragonfly-64 (Pill com Borda RGB & Glass)
+   - Cards: Dark Obsidian Glassmorphism (Preto/Prata/Branco)
    ============================================================== */
 
+@property --rgb-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rgbSpin {
+  0% { --rgb-angle: 0deg; }
+  100% { --rgb-angle: 360deg; }
+}
+
+@keyframes rgbHue {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
 :root {
-  --bg-deep: #060913;
-  --bg-surface: rgba(13, 19, 36, 0.85);
-  --bg-surface-elevated: rgba(18, 26, 48, 0.9);
-  --neon-cyan: #00f0ff;
-  --neon-purple: #9d00ff;
-  --neon-blue: #0070f3;
-  --neon-crimson: #ff0055;
-  --neon-amber: #ffaa00;
-  --neon-emerald: #00ff9d;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --border-cyber: rgba(0, 240, 255, 0.25);
-  --border-cyber-focus: rgba(0, 240, 255, 0.7);
-  --font-tech: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --bg-void: #030305;
+  --bg-card: #08080c;
+  --bg-card-hover: #0e0e14;
+  --bg-surface: #0c0c10;
+  --text-white: #ffffff;
+  --text-silver: #e2e8f0;
+  --text-muted: #808a9d;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(255, 255, 255, 0.25);
+  --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
   --font-mono: 'Consolas', 'Courier New', monospace;
 }
 
 /* ==============================================================
-   1. FUNDO CIBERNETICO (amir_6539/red-duck-82)
-   Cosmos Profundo com Nebulosas em Gradiente Radial e Grid Espacial
+   1. FUNDO MONOCROMATICO NECROMANCER (amir_6539/red-duck-82)
+   Void Escuro Profundo com Grade Geometrica Fina e Sem Excesso de Cores
    ============================================================== */
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-tech);
-  background-color: var(--bg-deep);
-  color: var(--text-primary);
+  font-family: var(--font-main);
+  background-color: var(--bg-void);
+  color: var(--text-white);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
   background-image:
-    /* Nebulosa Ciano Superior Esquerda */
-    radial-gradient(circle at 12% 18%, rgba(0, 240, 255, 0.12) 0%, transparent 45%),
-    /* Nebulosa Violeta Inferior Direita */
-    radial-gradient(circle at 88% 82%, rgba(157, 0, 255, 0.13) 0%, transparent 50%),
-    /* Nebulosa Azul Central */
-    radial-gradient(circle at 50% 45%, rgba(0, 112, 243, 0.08) 0%, transparent 65%),
-    /* Grid Cibernetico Espacial */
-    linear-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.035) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 42px 42px, 42px 42px;
+    /* Vignette suave do centro ao preto total */
+    radial-gradient(circle at 50% 25%, #0a0a10 0%, #030305 75%),
+    /* Micro-grid geometrico minimalista */
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 36px 36px, 36px 36px;
   background-attachment: fixed;
 }
 
-/* Scanlines ciberneticas sutis */
+/* Scanline quase imperceptivel para textura sem poluir visual */
 body::before {
-  content: " ";
-  display: block;
+  content: "";
   position: fixed;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+  background-size: 100% 4px;
   z-index: -1;
-  background-size: 100% 3px, 6px 100%;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 /* ==============================================================
-   NAVBAR HOLOGRAFICA & LOGO CIBERNETICO
+   2. BORDAS RGB NOS BOTOES (CHROMA SPECTRUM GLOW)
+   Bordas com gradiente arco-iris em movimento continuo
    ============================================================== */
-.cyber-navbar {
-  background: rgba(8, 12, 24, 0.85) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-cyber);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 240, 255, 0.15);
+.btn-rgb, .btn-cyber-primary, .btn-primary {
+  position: relative;
+  background: #060608 !important;
+  color: #ffffff !important;
+  border-radius: 12px;
+  border: none !important;
+  padding: 0.75rem 1.6rem;
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
 }
 
-.nexus-logo-wrapper {
+/* Moldura RGB animada */
+.btn-rgb::before, .btn-cyber-primary::before, .btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  background: conic-gradient(from var(--rgb-angle), #ff0055, #ff9900, #ffff00, #00ff66, #00ffff, #0066ff, #9900ff, #ff00aa, #ff0055);
+  z-index: -1;
+  animation: rgbSpin 4s linear infinite;
+  transition: opacity 0.3s ease;
+}
+
+/* Brilho RGB volumetrico externo (Bloom) */
+.btn-rgb::after, .btn-cyber-primary::after, .btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 18px;
+  background: conic-gradient(from var(--rgb-angle), #ff0055, #ff9900, #ffff00, #00ff66, #00ffff, #0066ff, #9900ff, #ff00aa, #ff0055);
+  z-index: -2;
+  filter: blur(14px);
+  opacity: 0.45;
+  animation: rgbSpin 4s linear infinite;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.btn-rgb:hover, .btn-cyber-primary:hover, .btn-primary:hover {
+  transform: translateY(-2px);
+  color: #ffffff !important;
+}
+
+.btn-rgb:hover::after, .btn-cyber-primary:hover::after, .btn-primary:hover::after {
+  opacity: 0.85;
+  filter: blur(20px);
+}
+
+.btn-rgb:active, .btn-cyber-primary:active, .btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Botao Perigo com Borda RGB avermelhada */
+.btn-cyber-danger, .btn-danger {
+  position: relative;
+  background: #090607 !important;
+  color: #ffffff !important;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 50, 50, 0.5) !important;
+  padding: 0.5rem 1.1rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 50, 0.25);
+}
+
+.btn-cyber-danger:hover, .btn-danger:hover {
+  background: #1a080c !important;
+  border-color: #ff3355 !important;
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+  transform: translateY(-2px);
+}
+
+/* ==============================================================
+   3. BOTÃO DA IA (Spacious74/lazy-dragonfly-64)
+   Pill Futurista com Borda RGB Dinâmica, Glassmorphism e Ícone 3D
+   ============================================================== */
+.nexus-ai-wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1050;
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Botão Lazy-Dragonfly-64 da IA */
+.btn-lazy-dragonfly {
+  position: relative;
+  background: #08080c;
+  color: #ffffff;
+  border-radius: 40px;
+  padding: 10px 22px;
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 1;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.9);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  border: none;
   text-decoration: none;
 }
 
-.nexus-logo-svg {
-  width: 44px;
-  height: 44px;
-  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.6));
-  animation: logoOrbit 12s linear infinite;
+/* Borda RGB da Pill */
+.btn-lazy-dragonfly::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 42px;
+  background: conic-gradient(from var(--rgb-angle), #ff0055, #ff9900, #ffff00, #00ff66, #00ffff, #0066ff, #9900ff, #ff00aa, #ff0055);
+  z-index: -1;
+  animation: rgbSpin 3.5s linear infinite;
 }
 
-@keyframes logoOrbit {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Aura RGB Difusa do Botao */
+.btn-lazy-dragonfly::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 48px;
+  background: conic-gradient(from var(--rgb-angle), #ff0055, #ff9900, #ffff00, #00ff66, #00ffff, #0066ff, #9900ff, #ff00aa, #ff0055);
+  z-index: -2;
+  filter: blur(18px);
+  opacity: 0.6;
+  animation: rgbSpin 3.5s linear infinite;
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
-.nexus-logo-text {
-  font-family: var(--font-tech);
-  font-weight: 800;
-  font-size: 1.25rem;
-  letter-spacing: 1.5px;
-  background: linear-gradient(135deg, #ffffff 20%, var(--neon-cyan) 80%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
+.btn-lazy-dragonfly:hover {
+  transform: scale(1.06) translateY(-2px);
 }
 
-.nexus-logo-sub {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  color: var(--neon-cyan);
-  text-transform: uppercase;
+.btn-lazy-dragonfly:hover::after {
+  opacity: 1;
+  filter: blur(24px);
 }
 
-.badge-ai-version {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(157, 0, 255, 0.3));
-  border: 1px solid var(--neon-cyan);
-  color: var(--neon-cyan);
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 20px;
-  letter-spacing: 1px;
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
+.btn-lazy-dragonfly:active {
+  transform: scale(0.97);
 }
 
-.system-status-indicator {
+.ai-pill-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--neon-emerald);
-  text-transform: uppercase;
-  background: rgba(0, 255, 157, 0.08);
-  border: 1px solid rgba(0, 255, 157, 0.3);
-  padding: 4px 10px;
-  border-radius: 20px;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.9rem;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.pulse-beacon {
+.ai-pulse-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--neon-emerald);
-  box-shadow: 0 0 8px var(--neon-emerald);
-  animation: beaconPulse 1.8s infinite;
+  background: #00ff9d;
+  box-shadow: 0 0 8px #00ff9d;
+  animation: pulseDot 1.5s infinite;
 }
 
-@keyframes beaconPulse {
-  0% { transform: scale(0.9); box-shadow: 0 0 4px var(--neon-emerald); }
-  50% { transform: scale(1.3); box-shadow: 0 0 14px var(--neon-emerald); }
-  100% { transform: scale(0.9); box-shadow: 0 0 4px var(--neon-emerald); }
-}
-
-/* ==============================================================
-   CARDS DE ESTATISTICAS HUD NO TOPO
-   ============================================================== */
-.hud-stat-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-cyber);
-  border-radius: 14px;
-  padding: 1.25rem;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.hud-stat-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 10px 28px rgba(0, 240, 255, 0.25);
-}
-
-.hud-stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 4px; height: 100%;
-}
-
-.hud-card-total::before { background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
-.hud-card-pendentes::before { background: var(--neon-amber); box-shadow: 0 0 10px var(--neon-amber); }
-.hud-card-concluidas::before { background: var(--neon-emerald); box-shadow: 0 0 10px var(--neon-emerald); }
-
-.hud-stat-num {
-  font-family: var(--font-tech);
-  font-size: 2.2rem;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -1px;
-}
-
-.hud-card-total .hud-stat-num { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(0, 240, 255, 0.4); }
-.hud-card-pendentes .hud-stat-num { color: var(--neon-amber); text-shadow: 0 0 15px rgba(255, 170, 0, 0.4); }
-.hud-card-concluidas .hud-stat-num { color: var(--neon-emerald); text-shadow: 0 0 15px rgba(0, 255, 157, 0.4); }
-
-.hud-stat-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: var(--text-muted);
-  text-transform: uppercase;
+@keyframes pulseDot {
+  0%, 100% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
 }
 
 /* ==============================================================
-   PAINEL DE CADASTRO E BUSCA CIBERNETICOS
-   ============================================================== */
-.cyber-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-cyber);
-  border-radius: 16px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  color: var(--text-primary);
-}
-
-.cyber-card .card-header {
-  background: rgba(18, 26, 48, 0.6) !important;
-  border-bottom: 1px solid var(--border-cyber);
-  padding: 1rem 1.25rem;
-}
-
-.cyber-card .card-title {
-  color: var(--neon-cyan);
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
-}
-
-.cyber-input, .form-control, .form-select {
-  background-color: rgba(9, 14, 28, 0.8) !important;
-  border: 1px solid rgba(0, 240, 255, 0.25) !important;
-  color: var(--text-primary) !important;
-  border-radius: 10px;
-  padding: 0.65rem 0.9rem;
-  transition: all 0.25s ease;
-}
-
-.cyber-input:focus, .form-control:focus, .form-select:focus {
-  background-color: rgba(13, 20, 39, 0.95) !important;
-  border-color: var(--neon-cyan) !important;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.45) !important;
-  outline: none;
-}
-
-.form-label {
-  color: var(--text-secondary);
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-
-/* ==============================================================
-   2. CARDS DE TAREFAS (zeeshan_2112/shy-rattlesnake-3)
-   Cyber Tickets Futuristas com Neon, Brilho e Recortes Tecnologicos
+   4. CARDS DE TAREFAS NECROMANCER (PRETO E BRANCO)
    ============================================================== */
 .card-item-tarefa {
-  background: linear-gradient(135deg, rgba(16, 24, 46, 0.88) 0%, rgba(10, 16, 32, 0.92) 100%) !important;
-  border: 1px solid rgba(0, 240, 255, 0.22) !important;
-  border-radius: 16px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 1.1rem;
-}
-
-/* Linha de brilho superior */
-.card-item-tarefa::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 1.5px;
-  background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-purple), transparent);
-  opacity: 0.7;
-}
-
-/* Recorte de ticket cibernetico no canto */
-.card-item-tarefa::after {
-  content: 'PASS-ID';
-  position: absolute;
-  right: 14px; bottom: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 2px;
-  color: rgba(0, 240, 255, 0.25);
-  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  transition: all 0.25s ease;
+  padding: 1.2rem;
 }
 
 .card-item-tarefa:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0, 240, 255, 0.6) !important;
-  box-shadow: 0 14px 35px -5px rgba(0, 240, 255, 0.25), 0 0 20px rgba(157, 0, 255, 0.2), inset 0 0 15px rgba(0, 240, 255, 0.05);
+  background: var(--bg-card-hover) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
-/* Prioridades no estilo neon ticket */
+/* Indicadores de prioridade limpos (linha discreta na esquerda) */
 .prioridade-alta {
-  border-left: 4px solid var(--neon-crimson) !important;
+  border-left: 3px solid #ff3355 !important;
 }
-.prioridade-alta:hover {
-  box-shadow: 0 14px 35px -5px rgba(255, 0, 85, 0.3), 0 0 20px rgba(255, 0, 85, 0.2) !important;
-  border-color: var(--neon-crimson) !important;
-}
-
 .prioridade-media {
-  border-left: 4px solid var(--neon-amber) !important;
+  border-left: 3px solid #ffaa00 !important;
 }
-.prioridade-media:hover {
-  box-shadow: 0 14px 35px -5px rgba(255, 170, 0, 0.3), 0 0 20px rgba(255, 170, 0, 0.2) !important;
-  border-color: var(--neon-amber) !important;
-}
-
 .prioridade-baixa {
-  border-left: 4px solid var(--neon-emerald) !important;
-}
-.prioridade-baixa:hover {
-  box-shadow: 0 14px 35px -5px rgba(0, 255, 157, 0.3), 0 0 20px rgba(0, 255, 157, 0.2) !important;
-  border-color: var(--neon-emerald) !important;
+  border-left: 3px solid #ffffff !important;
 }
 
-/* Estado de Tarefa Concluida */
+/* Tarefa Concluida */
 .tarefa-feita {
-  opacity: 0.6;
-  background: rgba(8, 12, 22, 0.7) !important;
-  border-left-color: var(--neon-emerald) !important;
-  border-color: rgba(0, 255, 157, 0.2) !important;
+  opacity: 0.45;
+  background: #050507 !important;
+  border-left-color: #64748b !important;
 }
 
 .tarefa-feita .titulo-txt {
@@ -342,20 +308,20 @@ body::before {
 }
 
 .titulo-txt {
-  color: var(--text-primary);
+  color: var(--text-white);
   font-size: 1.05rem;
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 /* ==============================================================
-   3. TOGGLE / CHECKBOX CIBERNETICO (Shammy2002/evil-shrimp-6)
-   Glowing Rounded Dark-Themed Checkbox/Switch
+   5. TOGGLE CIBERNETICO PRETO E BRANCO (Shammy2002)
    ============================================================== */
 .cyber-toggle {
   position: relative;
   display: inline-block;
-  width: 48px;
-  height: 26px;
+  width: 46px;
+  height: 24px;
   cursor: pointer;
   flex-shrink: 0;
   margin: 0;
@@ -371,389 +337,324 @@ body::before {
 .cyber-slider {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #0b1120;
-  border: 1.5px solid rgba(0, 240, 255, 0.3);
+  background-color: #0d0d12;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s ease;
 }
 
 .cyber-knob {
   position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
+  height: 16px;
+  width: 16px;
   left: 3px;
   bottom: 2.5px;
-  background-color: #475569;
+  background-color: #64748b;
   border-radius: 50%;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s ease;
 }
 
-/* Estado Ativado / Marcado do Toggle */
 .cyber-toggle input:checked + .cyber-slider {
-  background-color: rgba(0, 240, 255, 0.15);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4), inset 0 0 8px rgba(0, 240, 255, 0.2);
+  background-color: #1a1a24;
+  border-color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .cyber-toggle input:checked + .cyber-slider .cyber-knob {
-  transform: translateX(22px);
-  background-color: var(--neon-cyan);
-  box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 240, 255, 0.8);
+  transform: translateX(20px);
+  background-color: #ffffff;
+  box-shadow: 0 0 10px #ffffff;
 }
 
 /* ==============================================================
-   4. BOTOES CIBERNETICOS (Kabak/unlucky-treefrog-77)
-   Minimal, Sleek Dark-Themed Buttons with Glowing Outline
+   6. NAVBAR E LOGOTIPO HOLOGRÁFICO NECROMANCER
    ============================================================== */
-.btn-cyber-primary, .btn-primary {
-  position: relative;
-  background: #090e1c !important;
-  color: var(--neon-cyan) !important;
-  border: 1.5px solid var(--neon-cyan) !important;
-  border-radius: 10px;
-  padding: 0.65rem 1.4rem;
-  font-family: var(--font-tech);
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.35s ease;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3), inset 0 0 8px rgba(0, 240, 255, 0.1);
-  display: inline-flex;
+.cyber-navbar {
+  background: rgba(5, 5, 7, 0.95) !important;
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
+}
+
+.nexus-logo-wrapper {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  gap: 12px;
+  text-decoration: none;
 }
 
-/* Efeito de raio de luz que passa pelo botao no hover (Shimmer) */
-.btn-cyber-primary::before, .btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.35), transparent);
-  transition: 0.5s;
+.nexus-logo-svg {
+  width: 42px;
+  height: 42px;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
 }
 
-.btn-cyber-primary:hover::before, .btn-primary:hover::before {
-  left: 100%;
+.nexus-logo-text {
+  font-family: var(--font-main);
+  font-weight: 900;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
 }
 
-.btn-cyber-primary:hover, .btn-primary:hover {
-  color: #ffffff !important;
-  background: rgba(0, 240, 255, 0.18) !important;
-  border-color: #ffffff !important;
-  box-shadow: 0 0 24px rgba(0, 240, 255, 0.7), inset 0 0 14px rgba(0, 240, 255, 0.3);
-  transform: translateY(-2px);
-}
-
-.btn-cyber-primary:active, .btn-primary:active {
-  transform: translateY(0) scale(0.98);
-}
-
-/* Variante Perigo / Limpar (Crimson Glow) */
-.btn-cyber-danger, .btn-danger {
-  position: relative;
-  background: #14080e !important;
-  color: var(--neon-crimson) !important;
-  border: 1.5px solid var(--neon-crimson) !important;
-  border-radius: 10px;
-  padding: 0.55rem 1.1rem;
+.nexus-logo-sub {
+  font-size: 0.65rem;
   font-weight: 700;
-  font-size: 0.82rem;
-  letter-spacing: 1.5px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
   text-transform: uppercase;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
 }
 
-.btn-cyber-danger:hover, .btn-danger:hover {
-  background: rgba(255, 0, 85, 0.2) !important;
-  color: #fff !important;
-  box-shadow: 0 0 22px rgba(255, 0, 85, 0.7);
+.badge-ai-version {
+  background: #111118;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 12px;
+  letter-spacing: 1px;
+}
+
+.system-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  background: #09090d;
+  border: 1px solid var(--border-subtle);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.pulse-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+  animation: beaconPulse 1.8s infinite;
+}
+
+@keyframes beaconPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ==============================================================
+   7. CARDS DE ESTATISTICAS HUD NO TOPO (MONOCROMATICO)
+   ============================================================== */
+.hud-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hud-stat-card:hover {
   transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
 }
 
-/* Botoes de Acoes Pequenos (Editar / Apagar no Card) */
+.hud-stat-num {
+  font-family: var(--font-main);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.hud-stat-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Painel de Formulario e Busca */
+.cyber-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+}
+
+.cyber-card .card-header {
+  background: #0b0b10 !important;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1rem 1.25rem;
+}
+
+.cyber-card .card-title {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.cyber-input, .form-control, .form-select {
+  background-color: #060608 !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: #ffffff !important;
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.cyber-input:focus, .form-control:focus, .form-select:focus {
+  background-color: #0b0b10 !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15) !important;
+  outline: none;
+}
+
+.form-label {
+  color: var(--text-silver);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Botoes de Acao nos Cards */
 .btn-cyber-action {
-  background: rgba(12, 18, 34, 0.8);
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  color: var(--text-secondary);
+  background: #07070a;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
   border-radius: 8px;
   width: 32px;
   height: 32px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 .btn-cyber-action:hover {
-  color: var(--neon-cyan);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-  transform: scale(1.1);
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: scale(1.08);
 }
 
 .btn-cyber-delete:hover {
-  color: var(--neon-crimson) !important;
-  border-color: var(--neon-crimson) !important;
-  box-shadow: 0 0 10px rgba(255, 0, 85, 0.4) !important;
+  color: #ff3355 !important;
+  border-color: #ff3355 !important;
 }
 
-/* Botoes de Filtros de Status */
+/* Filtros */
 .btn-cyber-filter {
-  background: rgba(10, 16, 32, 0.8);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  color: var(--text-secondary);
+  background: #08080c;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 0.45rem 0.9rem;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 .btn-cyber-filter.active, .btn-cyber-filter:hover {
-  background: rgba(0, 240, 255, 0.15) !important;
-  color: var(--neon-cyan) !important;
-  border-color: var(--neon-cyan) !important;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4) !important;
+  background: #151520 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
-/* ==============================================================
-   BADGES CIBERNETICAS HOLOGRAFICAS
-   ============================================================== */
+/* Badges Monocromaticas com Detalhes Discretos */
 .cyber-badge {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 1px;
-  padding: 4px 8px;
+  padding: 3px 8px;
   border-radius: 6px;
   text-transform: uppercase;
-  border: 1px solid transparent;
 }
 
 .cyber-badge-category {
-  background: rgba(0, 112, 243, 0.12);
-  border-color: rgba(0, 112, 243, 0.4);
-  color: #60a5fa;
+  background: #111118;
+  border: 1px solid var(--border-subtle);
+  color: #cbd5e1;
 }
 
 .cyber-badge-alta {
-  background: rgba(255, 0, 85, 0.12);
-  border-color: var(--neon-crimson);
-  color: var(--neon-crimson);
-  box-shadow: 0 0 8px rgba(255, 0, 85, 0.3);
+  background: #1a080c;
+  border: 1px solid rgba(255, 51, 85, 0.4);
+  color: #ff3355;
 }
 
 .cyber-badge-media {
-  background: rgba(255, 170, 0, 0.12);
-  border-color: var(--neon-amber);
-  color: var(--neon-amber);
-  box-shadow: 0 0 8px rgba(255, 170, 0, 0.3);
+  background: #1a1408;
+  border: 1px solid rgba(255, 170, 0, 0.4);
+  color: #ffaa00;
 }
 
 .cyber-badge-baixa {
-  background: rgba(0, 255, 157, 0.12);
-  border-color: var(--neon-emerald);
-  color: var(--neon-emerald);
-  box-shadow: 0 0 8px rgba(0, 255, 157, 0.3);
+  background: #0c140e;
+  border: 1px solid rgba(0, 255, 157, 0.4);
+  color: #00ff9d;
 }
 
 /* ==============================================================
-   5. IA NO CANTO - NEXUS AI 2.0 (FLOATING CYBER ASSISTANT)
+   8. JANELA DE CHAT DA IA (MONOCROMÁTICA COM BORDAS RGB)
    ============================================================== */
-.nexus-ai-wrapper {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 1050;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-/* Botao Flutuante da IA com Orbitas e Pulso */
-.nexus-ai-trigger {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #090e1c;
-  border: 2px solid var(--neon-cyan);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), inset 0 0 14px rgba(0, 240, 255, 0.3);
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: all 0.3s ease;
-  color: var(--neon-cyan);
-}
-
-.nexus-ai-trigger:hover {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 0 32px rgba(0, 240, 255, 0.8), inset 0 0 20px rgba(0, 240, 255, 0.5);
-  border-color: #ffffff;
-}
-
-.nexus-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px dashed rgba(0, 240, 255, 0.4);
-  pointer-events: none;
-}
-
-.ring-1 {
-  width: 76px; height: 76px;
-  animation: ringRotate 8s linear infinite;
-}
-
-.ring-2 {
-  width: 86px; height: 86px;
-  border: 1px dotted rgba(157, 0, 255, 0.5);
-  animation: ringRotateRev 12s linear infinite;
-}
-
-@keyframes ringRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@keyframes ringRotateRev { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
-
-.nexus-trigger-label {
-  position: absolute;
-  bottom: -22px;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 8px var(--neon-cyan);
-  white-space: nowrap;
-}
-
-.nexus-notification-ping {
-  position: absolute;
-  top: 2px; right: 2px;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--neon-emerald);
-  box-shadow: 0 0 10px var(--neon-emerald);
-  animation: beaconPulse 1.5s infinite;
-}
-
-/* Janela Flutuante do Chat da IA */
 .nexus-ai-window {
   width: 390px;
   max-width: calc(100vw - 40px);
   height: 540px;
   max-height: calc(100vh - 120px);
-  background: rgba(10, 15, 30, 0.95);
-  border: 1.5px solid var(--neon-cyan);
+  background: #07070a;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 240, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
   overflow: hidden;
-  animation: windowSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: windowSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes windowSlideIn {
-  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  from { opacity: 0; transform: translateY(15px) scale(0.97); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .nexus-ai-header {
-  background: rgba(16, 24, 48, 0.9);
-  border-bottom: 1px solid var(--border-cyber);
+  background: #0c0c12;
+  border-bottom: 1px solid var(--border-subtle);
   padding: 12px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.nexus-core-mini {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: #060913;
-  border: 1px solid var(--neon-cyan);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-}
-
-.nexus-ai-title {
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  letter-spacing: 1px;
-}
-
-.badge-quantum {
-  font-size: 0.62rem;
-  background: rgba(0, 240, 255, 0.2);
-  color: var(--neon-cyan);
-  border: 1px solid var(--neon-cyan);
-  padding: 2px 6px;
-  border-radius: 12px;
-}
-
-.nexus-ai-status {
-  font-size: 0.65rem;
-  color: var(--neon-emerald);
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.nexus-status-dot {
-  display: inline-block;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--neon-emerald);
-  box-shadow: 0 0 6px var(--neon-emerald);
-}
-
-.btn-ai-icon {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 4px 6px;
-  border-radius: 6px;
-  transition: all 0.2s;
-}
-
-.btn-ai-icon:hover {
-  color: var(--neon-cyan);
-  background: rgba(0, 240, 255, 0.1);
-}
-
-/* Chips Rapidos */
 .nexus-ai-chips {
   display: flex;
   gap: 6px;
   padding: 10px 14px;
   overflow-x: auto;
-  border-bottom: 1px solid rgba(0, 240, 255, 0.12);
-  background: rgba(8, 12, 24, 0.6);
+  border-bottom: 1px solid var(--border-subtle);
+  background: #050508;
 }
 
 .ai-chip {
-  background: rgba(14, 22, 42, 0.85);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  color: var(--neon-cyan);
+  background: #0d0d14;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-silver);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  padding: 5px 10px;
+  padding: 5px 11px;
   border-radius: 16px;
   white-space: nowrap;
   cursor: pointer;
@@ -761,13 +662,11 @@ body::before {
 }
 
 .ai-chip:hover {
-  background: rgba(0, 240, 255, 0.2);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-  transform: translateY(-1px);
+  background: #181824;
+  border-color: #ffffff;
+  color: #ffffff;
 }
 
-/* Area de Mensagens */
 .nexus-ai-messages {
   flex: 1;
   overflow-y: auto;
@@ -781,147 +680,89 @@ body::before {
   display: flex;
   gap: 10px;
   max-width: 90%;
-  animation: msgPop 0.25s ease;
-}
-
-@keyframes msgPop {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .ai-msg { align-self: flex-start; }
 .user-msg { align-self: flex-end; flex-direction: row-reverse; }
 
 .msg-avatar {
-  width: 30px; height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  background: #111118;
+  border: 1px solid var(--border-subtle);
+  color: #ffffff;
   flex-shrink: 0;
 }
 
-.ai-avatar {
-  background: #070c1a;
-  border: 1px solid var(--neon-cyan);
-  color: var(--neon-cyan);
-  box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
-}
-
-.user-avatar {
-  background: #1e1b4b;
-  border: 1px solid var(--neon-purple);
-  color: #c084fc;
-}
-
 .msg-bubble {
-  background: rgba(18, 26, 48, 0.85);
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  border-radius: 14px;
-  padding: 10px 14px;
+  background: #0e0e16;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 10px 13px;
   font-size: 0.84rem;
   line-height: 1.45;
-  color: var(--text-primary);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  color: var(--text-silver);
 }
 
 .user-msg .msg-bubble {
-  background: rgba(49, 27, 94, 0.85);
-  border-color: rgba(157, 0, 255, 0.4);
-}
-
-.cyber-code {
-  background: rgba(0, 0, 0, 0.4);
-  color: var(--neon-cyan);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-}
-
-.nexus-ai-typing {
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.typing-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--neon-cyan);
-  animation: typingBounce 1.4s infinite ease-in-out both;
-}
-
-.typing-dot:nth-child(1) { animation-delay: -0.32s; }
-.typing-dot:nth-child(2) { animation-delay: -0.16s; }
-
-@keyframes typingBounce {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1); }
+  background: #1a1a24;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 .nexus-ai-input-area {
   padding: 12px 14px;
-  border-top: 1px solid var(--border-cyber);
-  background: rgba(12, 18, 36, 0.9);
+  border-top: 1px solid var(--border-subtle);
+  background: #09090e;
   display: flex;
   gap: 8px;
 }
 
 .nexus-ai-input {
   flex: 1;
-  background: rgba(6, 10, 22, 0.9);
-  border: 1.5px solid rgba(0, 240, 255, 0.3);
-  border-radius: 24px;
-  padding: 8px 16px;
-  color: var(--text-primary);
-  font-size: 0.85rem;
+  background: #040406;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 8px 14px;
+  color: #ffffff;
+  font-size: 0.84rem;
   outline: none;
-  transition: all 0.25s;
 }
 
 .nexus-ai-input:focus {
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .btn-ai-send {
-  width: 38px; height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: var(--neon-cyan);
-  color: #060913;
+  background: #ffffff;
+  color: #000000;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s;
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  font-weight: bold;
 }
 
-.btn-ai-send:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 18px rgba(0, 240, 255, 0.8);
-}
-
-/* Modais estilizados no tema cyber */
+/* Modais */
 .modal-content {
-  background: rgba(12, 18, 36, 0.95) !important;
-  border: 1.5px solid var(--neon-cyan) !important;
-  border-radius: 18px !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.3) !important;
-  color: var(--text-primary) !important;
-  backdrop-filter: blur(20px) !important;
+  background: #08080c !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 16px !important;
+  color: #ffffff !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95) !important;
 }
 
-.modal-header {
-  border-bottom: 1px solid var(--border-cyber) !important;
+.modal-header, .modal-footer {
+  border-color: var(--border-subtle) !important;
 }
 
-.modal-footer {
-  border-top: 1px solid var(--border-cyber) !important;
-}
-
-.text-cyan { color: var(--neon-cyan) !important; }
+.text-cyan { color: #ffffff !important; }

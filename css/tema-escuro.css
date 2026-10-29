@@ -1,18 +1,14 @@
-/* Tema Escuro e Cibernetico Otimizado */
+/* Tema Necromancer */
 [data-bs-theme="dark"] body {
-  background-color: var(--bg-deep) !important;
-  color: var(--text-primary) !important;
+  background-color: var(--bg-void) !important;
+  color: var(--text-white) !important;
 }
 
 [data-bs-theme="dark"] .card {
-  background-color: transparent;
+  background-color: var(--bg-card);
 }
 
-/* Modo Stealth (Claro Suave) */
 [data-bs-theme="light"] body {
-  --bg-deep: #0b1120;
-  --bg-surface: rgba(18, 27, 49, 0.9);
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  filter: hue-rotate(25deg);
+  --bg-void: #07070a;
+  --bg-card: #0d0d12;
 }
