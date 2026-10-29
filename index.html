@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minhas Tarefas Desktop</title>
+  <title>NEXUS TAREFAS AI - Grau Técnico Desktop</title>
   
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   
-  <!-- Estilos locais do projeto -->
+  <!-- Estilos locais do projeto com inspiracao Uiverse.io -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/componentes.css">
   <link rel="stylesheet" href="css/tabelas.css">
@@ -18,19 +18,36 @@
   <link rel="stylesheet" href="css/responsivo.css">
   <link rel="stylesheet" href="css/tema-escuro.css">
 </head>
-<body class="bg-light">
+<body>
 
-  <!-- Barra de navegacao superior -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm mb-4">
+  <!-- Barra de navegacao superior Holografica -->
+  <nav class="navbar navbar-expand-lg cyber-navbar py-2 mb-4 sticky-top">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html">
-        <i class="bi bi-check2-square fs-4"></i>
-        <span>Minhas Tarefas <span class="badge bg-light text-primary fs-6">Desktop</span></span>
+      <!-- Logo Futurista com SVG Animado -->
+      <a class="nexus-logo-wrapper" href="index.html">
+        <svg class="nexus-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#00f0ff" stroke-width="2" stroke-dasharray="6 6" opacity="0.6"/>
+          <circle cx="50" cy="50" r="34" stroke="#9d00ff" stroke-width="1.5" stroke-dasharray="12 4" opacity="0.8"/>
+          <polygon points="50,20 76,35 76,65 50,80 24,65 24,35" stroke="#00f0ff" stroke-width="2.5" fill="rgba(0, 240, 255, 0.1)"/>
+          <circle cx="50" cy="50" r="10" fill="#00f0ff" filter="drop-shadow(0 0 8px #00f0ff)"/>
+          <path d="M50 32 L50 68 M34 50 L66 50" stroke="#060913" stroke-width="2"/>
+        </svg>
+        <div class="nexus-logo-text">
+          <span>NEXUS TAREFAS</span>
+          <span class="nexus-logo-sub">GRAU TÉCNICO <span class="badge-ai-version"><i class="bi bi-cpu-fill"></i> AI 2.0</span></span>
+        </div>
       </a>
+
+      <!-- Status do Sistema e Controles -->
       <div class="d-flex align-items-center gap-3">
-        <span class="text-white small d-none d-md-inline">Trabalho Desktop - Grau Tecnico</span>
-        <button id="btnAlternarTema" class="btn btn-outline-light btn-sm" title="Alternar Modo Escuro">
-          <i class="bi bi-moon-stars"></i>
+        <div class="system-status-indicator d-none d-md-flex">
+          <span class="pulse-beacon"></span>
+          <span>SISTEMA ONLINE</span>
+        </div>
+
+        <button id="btnAlternarTema" class="btn btn-cyber-primary btn-sm px-3" title="Alternar Modo Cibernético / Stealth">
+          <i class="bi bi-moon-stars-fill me-1"></i>
+          <span class="d-none d-sm-inline">TEMA</span>
         </button>
       </div>
     </div>
@@ -38,36 +55,36 @@
 
   <!-- Container principal -->
   <main class="container mb-5">
-    <!-- Linha de cards com contadores no topo -->
+    <!-- Linha de cards HUD com contadores no topo -->
     <div class="row g-3 mb-4" id="painel-estatisticas">
       <div class="col-md-4">
-        <div class="card p-3 bg-white border-0 shadow-sm border-start border-primary border-4">
+        <div class="hud-stat-card hud-card-total">
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <span class="text-muted small fw-bold">TOTAL DE TAREFAS</span>
-              <h3 class="fw-bold mb-0 text-primary" id="totalQtd">0</h3>
+              <span class="hud-stat-label">TOTAL NO RADAR</span>
+              <div class="hud-stat-num" id="totalQtd">0</div>
             </div>
-            <i class="bi bi-list-task fs-1 text-primary opacity-50"></i>
+            <i class="bi bi-grid-3x3-gap-fill fs-1 text-cyan opacity-50"></i>
           </div>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card p-3 bg-white border-0 shadow-sm border-start border-warning border-4">
+        <div class="hud-stat-card hud-card-pendentes">
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <span class="text-muted small fw-bold">PENDENTES</span>
-              <h3 class="fw-bold mb-0 text-warning" id="pendentesQtd">0</h3>
+              <span class="hud-stat-label">PENDÊNCIAS ATIVAS</span>
+              <div class="hud-stat-num" id="pendentesQtd">0</div>
             </div>
-            <i class="bi bi-clock-history fs-1 text-warning opacity-50"></i>
+            <i class="bi bi-hourglass-split fs-1 text-warning opacity-50"></i>
           </div>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card p-3 bg-white border-0 shadow-sm border-start border-success border-4">
+        <div class="hud-stat-card hud-card-concluidas">
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <span class="text-muted small fw-bold">CONCLUÍDAS</span>
-              <h3 class="fw-bold mb-0 text-success" id="concluidasQtd">0</h3>
+              <span class="hud-stat-label">METAS CONCLUÍDAS</span>
+              <div class="hud-stat-num" id="concluidasQtd">0</div>
             </div>
             <i class="bi bi-check2-circle fs-1 text-success opacity-50"></i>
           </div>
@@ -77,90 +94,101 @@
 
     <!-- Grid com formulario na esquerda e lista na direita -->
     <div class="row g-4">
-      <!-- Coluna da Esquerda: Formulario -->
+      <!-- Coluna da Esquerda: Formulario Futurista -->
       <div class="col-lg-4" id="coluna-form">
-        <div class="card shadow-sm border-0 mb-4 bg-white">
-          <div class="card-header bg-white py-3 border-0">
-            <h5 class="card-title mb-0 fw-bold text-primary">
-              <i class="bi bi-plus-circle me-1"></i> Nova Tarefa
+        <div class="cyber-card mb-4">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">
+              <i class="bi bi-plus-slash-minus me-1"></i> Injetar Tarefa
             </h5>
+            <span class="badge-quantum"><i class="bi bi-shield-check"></i> SECURE</span>
           </div>
-          <div class="card-body">
+          <div class="card-body p-3">
             <form id="formTarefa">
               <div class="mb-3">
-                <label for="titulo" class="form-label small fw-bold">Título da tarefa *</label>
-                <input type="text" class="form-control" id="titulo" placeholder="Ex: Estudar comandos SQL" required>
+                <label for="titulo" class="form-label small fw-bold">Título da Diretriz *</label>
+                <input type="text" class="form-control cyber-input" id="titulo" placeholder="Ex: Estudar comandos de roteamento Cisco" required>
               </div>
 
               <div class="mb-3">
-                <label for="descricao" class="form-label small fw-bold">Descrição detalhada</label>
-                <textarea class="form-control" id="descricao" rows="3" placeholder="Anotações e detalhes..."></textarea>
+                <label for="descricao" class="form-label small fw-bold">Detalhamento Técnico</label>
+                <textarea class="form-control cyber-input" id="descricao" rows="3" placeholder="Parâmetros, notas e objetivos de estudo..."></textarea>
               </div>
 
               <div class="mb-3">
-                <label for="categoria" class="form-label small fw-bold">Categoria</label>
-                <select class="form-select" id="categoria">
+                <label for="categoria" class="form-label small fw-bold">Módulo / Categoria</label>
+                <select class="form-select cyber-input" id="categoria">
                   <option value="redes">Redes de Computadores</option>
                   <option value="hardware">Manutenção de Hardware</option>
                   <option value="programacao" selected>Desenvolvimento e Lógica</option>
                   <option value="banco_dados">Banco de Dados</option>
                   <option value="sistemas">Sistemas Operacionais</option>
-                  <option value="geral">Geral / Escola</option>
+                  <option value="geral">Atividades Gerais da Escola</option>
                 </select>
               </div>
 
-              <div class="row g-2 mb-3">
+              <div class="row g-2 mb-4">
                 <div class="col-6">
                   <label for="prioridade" class="form-label small fw-bold">Prioridade</label>
-                  <select class="form-select" id="prioridade">
-                    <option value="baixa">Baixa</option>
-                    <option value="media" selected>Média</option>
-                    <option value="alta">Alta</option>
+                  <select class="form-select cyber-input" id="prioridade">
+                    <option value="baixa">Baixa (Estável)</option>
+                    <option value="media" selected>Média (Normal)</option>
+                    <option value="alta">Alta (Crítica)</option>
                   </select>
                 </div>
                 <div class="col-6">
-                  <label for="dataLimite" class="form-label small fw-bold">Data Entrega</label>
-                  <input type="date" class="form-control" id="dataLimite">
+                  <label for="dataLimite" class="form-label small fw-bold">Prazo Limite</label>
+                  <input type="date" class="form-control cyber-input" id="dataLimite">
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-primary w-100 fw-bold">
-                <i class="bi bi-save me-1"></i> Adicionar Tarefa
+              <!-- Botao Neon (Kabak/unlucky-treefrog-77) -->
+              <button type="submit" class="btn btn-cyber-primary w-100 py-3">
+                <i class="bi bi-send-check-fill me-1"></i> Cadastrar no Sistema
               </button>
             </form>
           </div>
         </div>
       </div>
 
-      <!-- Coluna da Direita: Barra de Busca e Lista -->
+      <!-- Coluna da Direita: Barra de Busca e Cards Ciberneticos -->
       <div class="col-lg-8" id="coluna-lista">
-        <div class="card shadow-sm border-0 mb-3 bg-white p-3">
+        <!-- Card de Busca e Filtros -->
+        <div class="cyber-card p-3 mb-3">
           <div class="input-group">
-            <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
-            <input type="text" id="campoPesquisa" class="form-control border-start-0 bg-light" placeholder="Pesquisar tarefas por título ou descrição...">
+            <span class="input-group-text bg-transparent border-cyber text-cyan">
+              <i class="bi bi-radar"></i>
+            </span>
+            <input type="text" id="campoPesquisa" class="form-control cyber-input border-start-0" placeholder="Escanear tarefas por título ou descrição técnica...">
           </div>
-          <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top flex-wrap gap-2">
+
+          <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary border-opacity-25 flex-wrap gap-2">
+            <!-- Filtros de Status (Botoes Sleek Kabak) -->
             <div class="btn-group btn-group-sm" role="group">
-              <button class="btn btn-outline-primary active btn-status" data-status="todas">Todas</button>
-              <button class="btn btn-outline-primary btn-status" data-status="pendentes">Pendentes</button>
-              <button class="btn btn-outline-primary btn-status" data-status="concluidas">Concluídas</button>
+              <button class="btn btn-cyber-filter active btn-status" data-status="todas">Todas</button>
+              <button class="btn btn-cyber-filter btn-status" data-status="pendentes">Pendentes</button>
+              <button class="btn btn-cyber-filter btn-status" data-status="concluidas">Concluídas</button>
             </div>
+
+            <!-- Filtros de Prioridade -->
             <div class="btn-group btn-group-sm" role="group">
-              <button class="btn btn-outline-secondary active btn-prio" data-prio="todas">Todas</button>
-              <button class="btn btn-outline-danger btn-prio" data-prio="alta">Alta</button>
-              <button class="btn btn-outline-warning btn-prio" data-prio="media">Média</button>
-              <button class="btn btn-outline-success btn-prio" data-prio="baixa">Baixa</button>
+              <button class="btn btn-cyber-filter active btn-prio" data-prio="todas">Todas</button>
+              <button class="btn btn-cyber-filter btn-prio text-danger" data-prio="alta">Alta</button>
+              <button class="btn btn-cyber-filter btn-prio text-warning" data-prio="media">Média</button>
+              <button class="btn btn-cyber-filter btn-prio text-success" data-prio="baixa">Baixa</button>
             </div>
           </div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-2 px-1">
-          <span class="small text-muted fw-bold" id="rotuloQtd">Tarefas</span>
-          <button id="btnLimparFeitas" class="btn btn-sm btn-link text-danger text-decoration-none">
-            <i class="bi bi-trash3 me-1"></i> Limpar tarefas concluídas
+        <!-- Cabecalho da Lista -->
+        <div class="d-flex justify-content-between align-items-center mb-3 px-1">
+          <span class="small text-cyan fw-bold text-uppercase" id="rotuloQtd">Tarefas</span>
+          <button id="btnLimparFeitas" class="btn btn-sm btn-cyber-danger">
+            <i class="bi bi-trash3-fill me-1"></i> Limpar Concluídas
           </button>
         </div>
 
+        <!-- Container de Cards (zeeshan_2112/shy-rattlesnake-3) -->
         <div id="listaTarefasCards" class="d-flex flex-column gap-3">
           <!-- Tarefas renderizadas dinamicamente aqui -->
         </div>
@@ -168,54 +196,54 @@
     </div>
   </main>
 
-  <!-- Modais -->
+  <!-- Modais Ciberneticos -->
   <div class="modal fade" id="modalConfirmar" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title text-danger"><i class="bi bi-exclamation-triangle me-1"></i> Confirmar Exclusão</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <h5 class="modal-title text-danger"><i class="bi bi-shield-slash me-2"></i> Confirmar Exclusão</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body">
-          Tem certeza de que deseja apagar esta tarefa?
+        <div class="modal-body py-4">
+          Você tem certeza que deseja expurgar esta tarefa do banco de dados local? Esta operação é irreversível.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="btnSimExcluir">Sim, Excluir</button>
+          <button type="button" class="btn btn-cyber-filter" data-bs-dismiss="modal">Abortar</button>
+          <button type="button" class="btn btn-cyber-danger" id="btnSimExcluir">Confirmar Purga</button>
         </div>
       </div>
     </div>
   </div>
 
   <div class="modal fade" id="modalEditar" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"><i class="bi bi-pencil-square me-1"></i> Editar Tarefa</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <h5 class="modal-title text-cyan"><i class="bi bi-sliders2 me-2"></i> Modificar Diretriz</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           <form id="formEditar">
             <input type="hidden" id="editId">
             <div class="mb-3">
-              <label class="form-label small fw-bold">Título</label>
-              <input type="text" id="editTitulo" class="form-control" required>
+              <label class="form-label small fw-bold">Título da Tarefa</label>
+              <input type="text" id="editTitulo" class="form-control cyber-input" required>
             </div>
             <div class="mb-3">
-              <label class="form-label small fw-bold">Descrição</label>
-              <textarea id="editDescricao" class="form-control" rows="3"></textarea>
+              <label class="form-label small fw-bold">Detalhamento</label>
+              <textarea id="editDescricao" class="form-control cyber-input" rows="3"></textarea>
             </div>
             <div class="mb-3">
               <label class="form-label small fw-bold">Prioridade</label>
-              <select id="editPrioridade" class="form-select">
+              <select id="editPrioridade" class="form-select cyber-input">
                 <option value="baixa">Baixa</option>
                 <option value="media">Média</option>
                 <option value="alta">Alta</option>
               </select>
             </div>
-            <div class="text-end">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <div class="text-end pt-2">
+              <button type="button" class="btn btn-cyber-filter me-2" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-cyber-primary">Gravar Alterações</button>
             </div>
           </form>
         </div>
@@ -223,10 +251,11 @@
     </div>
   </div>
 
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="toastAviso" class="toast align-items-center text-bg-success border-0" role="alert">
+  <!-- Toasts Ciberneticos -->
+  <div class="toast-container position-fixed bottom-0 start-0 p-3" style="z-index: 1060;">
+    <div id="toastAviso" class="toast align-items-center text-bg-dark border-1 border-info shadow-lg" role="alert">
       <div class="d-flex">
-        <div class="toast-body" id="toastTexto">Ação realizada!</div>
+        <div class="toast-body text-cyan fw-bold" id="toastTexto">Ação realizada com sucesso!</div>
         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
       </div>
     </div>
@@ -248,72 +277,12 @@
   <script src="js/exportar.js"></script>
   <script src="js/atalhos.js"></script>
   <script src="js/configuracoes.js"></script>
+  
+  <!-- Modulos de Audio e IA no Canto -->
+  <script src="js/cyber_audio.js"></script>
+  <script src="js/ia_assistente.js"></script>
+  
+  <!-- Controlador Principal -->
   <script src="js/app.js"></script>
 </body>
 </html>
-
-<!-- ==============================================================
-<!-- Detalhamento adicional e notas de estudo para o trabalho: estrutura principal index.html com bootstrap
-<!-- ==============================================================
-<!-- Regra/Nota 1: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 2: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 3: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 4: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 5: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 6: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 7: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 8: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 9: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 10: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 11: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 12: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 13: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 14: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 15: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 16: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 17: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 18: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 19: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 20: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 21: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 22: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 23: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 24: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 25: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 26: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 27: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 28: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 29: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 30: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 31: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 32: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 33: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 34: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 35: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 36: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 37: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 38: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 39: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 40: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 41: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 42: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 43: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 44: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 45: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 46: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 47: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 48: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 49: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 50: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 51: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 52: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 53: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 54: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 55: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 56: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 57: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 58: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 59: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 60: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 61: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-<!-- Regra/Nota 62: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.

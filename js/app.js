@@ -1,58 +1,96 @@
 // Controlador principal da interface e manipulacao do DOM (app.js)
+// Versao NEXUS AI 2.0 - Interface Futurista & Super Funcional
 let idParaDeletar = null;
 
 function atualizarIndicadores() {
   const lista = listarTodasTarefas();
   const stats = calcularEstatisticasTarefas(lista);
 
-  document.getElementById('totalQtd').innerText = stats.total;
-  document.getElementById('pendentesQtd').innerText = stats.pendentes;
-  document.getElementById('concluidasQtd').innerText = stats.concluidas;
+  const elTotal = document.getElementById('totalQtd');
+  const elPend = document.getElementById('pendentesQtd');
+  const elConc = document.getElementById('concluidasQtd');
+
+  if (elTotal) elTotal.innerText = stats.total;
+  if (elPend) elPend.innerText = stats.pendentes;
+  if (elConc) elConc.innerText = stats.concluidas;
 }
 
 function renderizarLista() {
   atualizarIndicadores();
 
   const container = document.getElementById('listaTarefasCards');
+  if (!container) return;
+
   const todas = listarTodasTarefas();
   const filtradas = filtrarTarefasColecao(todas);
 
   const rotulo = document.getElementById('rotuloQtd');
-  if (rotulo) rotulo.innerText = `Tarefas (${filtradas.length})`;
+  if (rotulo) rotulo.innerText = `Tarefas Detectadas (${filtradas.length})`;
 
   if (filtradas.length === 0) {
     container.innerHTML = `
-      <div class="alert alert-light text-center border py-4">
-        <i class="bi bi-inbox fs-2 text-muted"></i>
-        <p class="text-muted mt-2 mb-0">Nenhuma tarefa encontrada para os filtros atuais.</p>
+      <div class="cyber-card text-center p-5 border-dashed">
+        <i class="bi bi-shield-check text-cyan fs-1 opacity-75 mb-3 d-block"></i>
+        <h5 class="fw-bold text-cyan mb-1">Nenhum Registro no Radar</h5>
+        <p class="text-secondary small mb-3">Nenhuma tarefa corresponde aos filtros cibernéticos atuais.</p>
+        <button class="btn btn-cyber-primary btn-sm" onclick="NEXUS_AI.executarSugestaoEstudos()">
+          <i class="bi bi-lightning-charge-fill me-1"></i> Sugerir Tarefas com IA
+        </button>
       </div>
     `;
     return;
   }
 
+  // Renderiza cards inspirados em zeeshan_2112/shy-rattlesnake-3
+  // com toggle inspirado em Shammy2002/evil-shrimp-6
+  // e botoes inspirados em Kabak/unlucky-treefrog-77
   container.innerHTML = filtradas.map(t => {
     const nomeCat = CATEGORIAS_ENGINE.obterNomeCategoria(t.categoria);
-    const corCat = CATEGORIAS_ENGINE.obterCorCategoria(t.categoria);
+    const prazoFmt = t.dataLimite ? t.dataLimite.split('-').reverse().join('/') : null;
+
+    let prioBadgeClass = 'cyber-badge-media';
+    if (t.prioridade === 'alta') prioBadgeClass = 'cyber-badge-alta';
+    else if (t.prioridade === 'baixa') prioBadgeClass = 'cyber-badge-baixa';
 
     return `
-      <div class="card card-item-tarefa shadow-sm border-0 ${t.feita ? 'tarefa-feita' : ''} prioridade-${t.prioridade}">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center mb-1">
-            <div class="d-flex align-items-center gap-2">
-              <input class="form-check-input check-feita" type="checkbox" data-id="${t.id}" ${t.feita ? 'checked' : ''}>
-              <h5 class="card-title titulo-txt mb-0 fw-bold">${t.titulo}</h5>
-            </div>
-            <div>
-              <span class="badge" style="background-color: ${corCat}; font-size: 0.7rem;">${nomeCat}</span>
-              <span class="badge bg-${t.prioridade === 'alta' ? 'danger' : (t.prioridade === 'media' ? 'warning text-dark' : 'success')} text-uppercase ms-1" style="font-size: 0.7rem;">
-                ${t.prioridade}
+      <div class="card card-item-tarefa ${t.feita ? 'tarefa-feita' : ''} prioridade-${t.prioridade}">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <!-- Toggle Checkbox Futurista (Shammy2002/evil-shrimp-6) -->
+          <div class="d-flex align-items-center gap-3 flex-grow-1">
+            <label class="cyber-toggle" title="${t.feita ? 'Concluída (Clique para reabrir)' : 'Pendente (Clique para concluir)'}">
+              <input type="checkbox" class="check-feita" data-id="${t.id}" ${t.feita ? 'checked' : ''}>
+              <span class="cyber-slider">
+                <span class="cyber-knob"></span>
               </span>
-              <button class="btn btn-sm btn-outline-secondary btn-editar ms-2" data-id="${t.id}"><i class="bi bi-pencil"></i></button>
-              <button class="btn btn-sm btn-outline-danger btn-apagar ms-1" data-id="${t.id}"><i class="bi bi-trash"></i></button>
+            </label>
+
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <h5 class="card-title titulo-txt mb-0 fw-bold">${t.titulo}</h5>
+                ${t.feita ? '<span class="badge bg-success-subtle text-success small py-0 px-2 rounded-pill"><i class="bi bi-check2"></i> FEITA</span>' : ''}
+              </div>
+              ${t.descricao ? `<p class="text-secondary small mb-1 mt-1">${t.descricao}</p>` : ''}
+              <div class="d-flex align-items-center gap-3 mt-2 flex-wrap">
+                <span class="cyber-badge cyber-badge-category">
+                  <i class="bi bi-folder2-open me-1"></i>${nomeCat}
+                </span>
+                <span class="cyber-badge ${prioBadgeClass}">
+                  <i class="bi bi-speedometer2 me-1"></i>${t.prioridade}
+                </span>
+                ${prazoFmt ? `<span class="small text-secondary"><i class="bi bi-clock-history me-1 text-cyan"></i>Prazo: ${prazoFmt}</span>` : ''}
+              </div>
             </div>
           </div>
-          ${t.descricao ? `<p class="card-text text-muted small mb-2 ps-4">${t.descricao}</p>` : ''}
-          ${t.dataLimite ? `<div class="small text-secondary ps-4"><i class="bi bi-calendar-event me-1"></i>Prazo: ${t.dataLimite.split('-').reverse().join('/')}</div>` : ''}
+
+          <!-- Botoes de Acao Sleek (Kabak/unlucky-treefrog-77) -->
+          <div class="d-flex align-items-center gap-1 flex-shrink-0">
+            <button class="btn-cyber-action btn-editar" data-id="${t.id}" title="Editar Tarefa">
+              <i class="bi bi-pencil-fill"></i>
+            </button>
+            <button class="btn-cyber-action btn-cyber-delete btn-apagar" data-id="${t.id}" title="Excluir Tarefa">
+              <i class="bi bi-trash3-fill"></i>
+            </button>
+          </div>
         </div>
       </div>
     `;
@@ -63,6 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
   inicializarModuloTarefas();
   inicializarAtalhosTeclado();
   renderizarLista();
+
+  // Inicializa IA no canto e Audio Cibernetico
+  CYBER_AUDIO.init();
+  if (typeof NEXUS_AI !== 'undefined') {
+    NEXUS_AI.inicializar();
+  }
 
   // Formulario de cadastro
   const form = document.getElementById('formTarefa');
@@ -84,24 +128,29 @@ document.addEventListener('DOMContentLoaded', () => {
     registrarAcaoHistorico('CRIOU', valTitulo.valor);
     renderizarLista();
     form.reset();
+    CYBER_AUDIO.tocar('sucesso');
     emitirToastAviso('Tarefa cadastrada com sucesso!', 'success');
   });
 
   // Delegacao de cliques na lista
-  document.getElementById('listaTarefasCards').addEventListener('click', (e) => {
+  document.getElementById('listaTarefasCards').addEventListener('change', (e) => {
     const check = e.target.closest('.check-feita');
     if (check) {
       const tarefa = alternarConclusao(check.dataset.id);
       if (tarefa) {
         registrarAcaoHistorico(tarefa.feita ? 'CONCLUIU' : 'REABRIU', tarefa.titulo);
+        CYBER_AUDIO.tocar(tarefa.feita ? 'concluir' : 'click');
       }
       renderizarLista();
-      emitirToastAviso('Status alterado!', 'info');
+      emitirToastAviso(tarefa && tarefa.feita ? 'Tarefa concluída!' : 'Tarefa reaberta!', 'info');
       return;
     }
+  });
 
+  document.getElementById('listaTarefasCards').addEventListener('click', (e) => {
     const btnEditar = e.target.closest('.btn-editar');
     if (btnEditar) {
+      CYBER_AUDIO.tocar('click');
       const id = btnEditar.dataset.id;
       const t = listarTodasTarefas().find(item => item.id === id);
       if (t) {
@@ -117,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnApagar = e.target.closest('.btn-apagar');
     if (btnApagar) {
+      CYBER_AUDIO.tocar('click');
       idParaDeletar = btnApagar.dataset.id;
       const modal = new bootstrap.Modal(document.getElementById('modalConfirmar'));
       modal.show();
@@ -138,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const m = bootstrap.Modal.getInstance(document.getElementById('modalEditar'));
     if (m) m.hide();
     renderizarLista();
+    CYBER_AUDIO.tocar('sucesso');
     emitirToastAviso('Tarefa atualizada!', 'primary');
   });
 
@@ -150,15 +201,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const m = bootstrap.Modal.getInstance(document.getElementById('modalConfirmar'));
       if (m) m.hide();
       renderizarLista();
+      CYBER_AUDIO.tocar('excluir');
       emitirToastAviso('Tarefa excluída!', 'danger');
     }
   });
 
   // Limpar concluidas
   document.getElementById('btnLimparFeitas')?.addEventListener('click', () => {
+    CYBER_AUDIO.tocar('click');
     if (confirm('Deseja excluir todas as tarefas já marcadas como concluídas?')) {
       removerTodasConcluidas();
       renderizarLista();
+      CYBER_AUDIO.tocar('excluir');
       emitirToastAviso('Concluídas apagadas!', 'secondary');
     }
   });
@@ -172,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Botoes de status
   document.querySelectorAll('.btn-status').forEach(btn => {
     btn.addEventListener('click', () => {
+      CYBER_AUDIO.tocar('click');
       document.querySelectorAll('.btn-status').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       definirFiltroStatus(btn.dataset.status);
@@ -182,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Botoes de prioridade
   document.querySelectorAll('.btn-prio').forEach(btn => {
     btn.addEventListener('click', () => {
+      CYBER_AUDIO.tocar('click');
       document.querySelectorAll('.btn-prio').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       definirFiltroPrioridade(btn.dataset.prio);
@@ -189,8 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Alternador de tema
+  // Alternador de tema cibernetico
   document.getElementById('btnAlternarTema')?.addEventListener('click', () => {
+    CYBER_AUDIO.tocar('click');
     const atual = document.body.getAttribute('data-bs-theme');
     const novo = atual === 'dark' ? 'light' : 'dark';
     document.body.setAttribute('data-bs-theme', novo);
@@ -198,122 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Carregar tema salvo
-  const temaSalvo = localStorage.getItem('tema_aluno');
-  if (temaSalvo) {
-    document.body.setAttribute('data-bs-theme', temaSalvo);
-  }
+  const temaSalvo = localStorage.getItem('tema_aluno') || 'dark';
+  document.body.setAttribute('data-bs-theme', temaSalvo);
 });
-
-// ==============================================================
-// Detalhamento adicional e notas de estudo para o trabalho: orquestrador app.js
-// ==============================================================
-// Regra/Nota 1: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 2: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 3: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 4: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 5: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 6: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 7: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 8: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 9: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 10: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 11: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 12: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 13: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 14: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 15: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 16: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 17: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 18: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 19: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 20: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 21: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 22: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 23: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 24: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 25: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 26: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 27: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 28: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 29: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 30: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 31: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 32: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 33: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 34: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 35: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 36: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 37: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 38: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 39: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 40: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 41: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 42: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 43: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 44: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 45: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 46: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 47: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 48: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 49: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 50: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 51: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 52: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 53: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 54: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 55: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 56: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 57: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 58: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 59: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 60: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 61: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 62: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 63: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 64: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 65: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 66: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 67: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 68: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 69: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 70: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 71: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 72: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 73: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 74: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 75: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 76: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 77: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 78: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 79: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 80: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 81: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 82: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 83: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 84: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 85: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 86: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 87: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 88: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 89: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 90: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 91: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 92: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 93: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 94: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 95: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 96: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 97: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 98: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 99: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 100: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 101: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 102: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 103: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 104: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 105: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 106: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 107: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 108: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 109: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
-// Regra/Nota 110: Procedimento de verificacao e documentacao tecnica para a materia de Desenvolvimento Desktop.
