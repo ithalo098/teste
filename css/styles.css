@@ -13,13 +13,23 @@
 }
 
 @keyframes rgbSpin {
-  0% { --rgb-angle: 0deg; }
-  100% { --rgb-angle: 360deg; }
+  0% {
+    --rgb-angle: 0deg;
+  }
+
+  100% {
+    --rgb-angle: 360deg;
+  }
 }
 
 @keyframes rgbHue {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }
 
 :root {
@@ -63,7 +73,10 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
   background-size: 100% 4px;
   z-index: -1;
@@ -75,7 +88,9 @@ body::before {
    2. BORDAS RGB NOS BOTOES (CHROMA SPECTRUM GLOW)
    Bordas com gradiente arco-iris em movimento continuo
    ============================================================== */
-.btn-rgb, .btn-cyber-primary, .btn-primary {
+.btn-rgb,
+.btn-cyber-primary,
+.btn-primary {
   position: relative;
   background: #060608 !important;
   color: #ffffff !important;
@@ -98,7 +113,9 @@ body::before {
 }
 
 /* Moldura RGB animada */
-.btn-rgb::before, .btn-cyber-primary::before, .btn-primary::before {
+.btn-rgb::before,
+.btn-cyber-primary::before,
+.btn-primary::before {
   content: '';
   position: absolute;
   inset: -2px;
@@ -110,7 +127,9 @@ body::before {
 }
 
 /* Brilho RGB volumetrico externo (Bloom) */
-.btn-rgb::after, .btn-cyber-primary::after, .btn-primary::after {
+.btn-rgb::after,
+.btn-cyber-primary::after,
+.btn-primary::after {
   content: '';
   position: absolute;
   inset: -6px;
@@ -123,22 +142,29 @@ body::before {
   transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
-.btn-rgb:hover, .btn-cyber-primary:hover, .btn-primary:hover {
+.btn-rgb:hover,
+.btn-cyber-primary:hover,
+.btn-primary:hover {
   transform: translateY(-2px);
   color: #ffffff !important;
 }
 
-.btn-rgb:hover::after, .btn-cyber-primary:hover::after, .btn-primary:hover::after {
+.btn-rgb:hover::after,
+.btn-cyber-primary:hover::after,
+.btn-primary:hover::after {
   opacity: 0.85;
   filter: blur(20px);
 }
 
-.btn-rgb:active, .btn-cyber-primary:active, .btn-primary:active {
+.btn-rgb:active,
+.btn-cyber-primary:active,
+.btn-primary:active {
   transform: translateY(0) scale(0.98);
 }
 
 /* Botao Perigo com Borda RGB avermelhada */
-.btn-cyber-danger, .btn-danger {
+.btn-cyber-danger,
+.btn-danger {
   position: relative;
   background: #090607 !important;
   color: #ffffff !important;
@@ -153,7 +179,8 @@ body::before {
   box-shadow: 0 0 10px rgba(255, 0, 50, 0.25);
 }
 
-.btn-cyber-danger:hover, .btn-danger:hover {
+.btn-cyber-danger:hover,
+.btn-danger:hover {
   background: #1a080c !important;
   border-color: #ff3355 !important;
   box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
@@ -235,6 +262,163 @@ body::before {
   transform: scale(0.97);
 }
 
+/* Variantes do Botao Lazy Dragonfly */
+.btn-lazy-dragonfly.w-100 {
+  width: 100% !important;
+  justify-content: center;
+  border-radius: 14px !important;
+  padding: 14px 20px !important;
+}
+
+.btn-lazy-dragonfly.w-100::before {
+  border-radius: 16px !important;
+}
+
+.btn-lazy-dragonfly.w-100::after {
+  border-radius: 20px !important;
+}
+
+.btn-lazy-dragonfly.btn-sm {
+  padding: 6px 16px !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 1.2px !important;
+  gap: 7px !important;
+}
+
+/* ==============================================================
+   SMIT-PRAJAPATI / SMART-LIGER-5 (3D Glassmorphism Card)
+   ============================================================== */
+.smart-liger-parent {
+  width: 100%;
+  height: 200px;
+  perspective: 1000px;
+  margin-top: 1.25rem;
+}
+
+.smart-liger-card {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #07070a 0%, #101018 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease-in-out;
+  transform-style: preserve-3d;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+}
+
+.smart-liger-parent:hover .smart-liger-card {
+  transform: rotate3d(0.4, 1, 0, 14deg) translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 15px rgba(255, 255, 255, 0.08);
+}
+
+.smart-liger-glass {
+  position: absolute;
+  inset: 8px;
+  border-radius: 16px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.06) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translate3d(0px, 0px, 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.2rem;
+}
+
+.smart-liger-content {
+  transform: translate3d(0, 0, 30px);
+}
+
+/* ==============================================================
+   SOLID-METAL / MODERN-LIZARD-75 (Frosted Shine Card)
+   ============================================================== */
+.modern-lizard-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #050508;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+}
+
+.modern-lizard-container::after {
+  content: " ";
+  position: absolute;
+  height: 90px;
+  width: 90px;
+  left: 20%;
+  top: 15%;
+  background-image: radial-gradient(circle, rgba(255, 0, 90, 0.35), transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(25px);
+  animation: lizardOrb 14s ease-in-out infinite;
+}
+
+.modern-lizard-container::before {
+  content: " ";
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  right: 20%;
+  bottom: 15%;
+  background-image: radial-gradient(circle, rgba(0, 240, 255, 0.35), transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(25px);
+}
+
+@keyframes lizardOrb {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, 15px); }
+}
+
+.modern-lizard-card {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(9, 9, 14, 0.7);
+  padding: 1rem 1.25rem;
+  position: relative;
+  box-shadow: inset 1px 1px 4px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.modern-lizard-card::after {
+  z-index: -1;
+  content: " ";
+  position: absolute;
+  width: 160%;
+  top: 0;
+  left: -60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transform: rotateZ(35deg);
+  filter: blur(18px);
+  animation: lizardShine 9s ease infinite;
+}
+
+@keyframes lizardShine {
+  0% { transform: translateX(-160%) rotateZ(35deg); }
+  100% { transform: translateX(160%) rotateZ(35deg); }
+}
+
+.btn-lazy-dragonfly:active {
+  transform: scale(0.97);
+}
+
 .ai-pill-icon {
   width: 28px;
   height: 28px;
@@ -259,8 +443,17 @@ body::before {
 }
 
 @keyframes pulseDot {
-  0%, 100% { transform: scale(0.9); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
 }
 
 /* ==============================================================
@@ -288,9 +481,11 @@ body::before {
 .prioridade-alta {
   border-left: 3px solid #ff3355 !important;
 }
+
 .prioridade-media {
   border-left: 3px solid #ffaa00 !important;
 }
+
 .prioridade-baixa {
   border-left: 3px solid #ffffff !important;
 }
@@ -336,7 +531,10 @@ body::before {
 
 .cyber-slider {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #0d0d12;
   border: 1.5px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
@@ -354,13 +552,13 @@ body::before {
   transition: all 0.25s ease;
 }
 
-.cyber-toggle input:checked + .cyber-slider {
+.cyber-toggle input:checked+.cyber-slider {
   background-color: #1a1a24;
   border-color: #ffffff;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
-.cyber-toggle input:checked + .cyber-slider .cyber-knob {
+.cyber-toggle input:checked+.cyber-slider .cyber-knob {
   transform: translateX(20px);
   background-color: #ffffff;
   box-shadow: 0 0 10px #ffffff;
@@ -444,8 +642,17 @@ body::before {
 }
 
 @keyframes beaconPulse {
-  0%, 100% { opacity: 0.6; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.2); }
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
 /* ==============================================================
@@ -502,7 +709,9 @@ body::before {
   letter-spacing: 1px;
 }
 
-.cyber-input, .form-control, .form-select {
+.cyber-input,
+.form-control,
+.form-select {
   background-color: #060608 !important;
   border: 1px solid var(--border-subtle) !important;
   color: #ffffff !important;
@@ -511,7 +720,9 @@ body::before {
   transition: all 0.2s ease;
 }
 
-.cyber-input:focus, .form-control:focus, .form-select:focus {
+.cyber-input:focus,
+.form-control:focus,
+.form-select:focus {
   background-color: #0b0b10 !important;
   border-color: rgba(255, 255, 255, 0.4) !important;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.15) !important;
@@ -564,7 +775,8 @@ body::before {
   transition: all 0.2s ease;
 }
 
-.btn-cyber-filter.active, .btn-cyber-filter:hover {
+.btn-cyber-filter.active,
+.btn-cyber-filter:hover {
   background: #151520 !important;
   color: #ffffff !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
@@ -625,8 +837,15 @@ body::before {
 }
 
 @keyframes windowSlideIn {
-  from { opacity: 0; transform: translateY(15px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .nexus-ai-header {
@@ -682,8 +901,14 @@ body::before {
   max-width: 90%;
 }
 
-.ai-msg { align-self: flex-start; }
-.user-msg { align-self: flex-end; flex-direction: row-reverse; }
+.ai-msg {
+  align-self: flex-start;
+}
+
+.user-msg {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
 
 .msg-avatar {
   width: 28px;
@@ -761,8 +986,11 @@ body::before {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95) !important;
 }
 
-.modal-header, .modal-footer {
+.modal-header,
+.modal-footer {
   border-color: var(--border-subtle) !important;
 }
 
-.text-cyan { color: #ffffff !important; }
+.text-cyan {
+  color: #ffffff !important;
+}
