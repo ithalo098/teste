@@ -351,3 +351,65 @@
   opacity: 0;
   pointer-events: none;
 }
+
+
+/* ==============================================================
+   ICONES PNG 3D CYBERPUNK - INJETAR TAREFA & SECURE BADGE
+   ============================================================== */
+.cyber-header-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4), inset 0 0 4px rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  vertical-align: middle;
+  margin-right: 8px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.cyber-card:hover .cyber-header-icon {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.8);
+  border-color: rgba(56, 189, 248, 0.9);
+}
+
+.badge-quantum-secure {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 999px;
+  padding: 3px 12px 3px 6px;
+  font-family: monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #34d399;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.badge-quantum-secure:hover {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: rgba(16, 185, 129, 0.7);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.45);
+  transform: translateY(-1px);
+}
+
+.badge-quantum-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.7);
+  border: 1px solid rgba(52, 211, 153, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.badge-quantum-secure:hover .badge-quantum-icon {
+  transform: rotate(15deg) scale(1.1);
+}
