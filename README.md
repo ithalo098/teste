@@ -6,8 +6,7 @@ Aplicação desktop desenvolvida em trio com **Electron** e **Bootstrap 5** para
 
 ## 👥 Integrantes do Trio
 - **Íthalo (ithalo098)**
-- Integrante 2
-- Integrante 3
+- **Henrique (Henriquematsof)**
 
 ---
 
