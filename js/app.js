@@ -267,16 +267,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Alternador de tema cibernetico
-  document.getElementById('btnAlternarTema')?.addEventListener('click', () => {
-    CYBER_AUDIO.tocar('click');
-    const atual = document.body.getAttribute('data-bs-theme');
-    const novo = atual === 'dark' ? 'light' : 'dark';
-    document.body.setAttribute('data-bs-theme', novo);
-    localStorage.setItem('tema_aluno', novo);
-  });
+  // Alternador de tema cibernetico (cuddly-bat-26)
+  const temaCheckbox = document.getElementById('btnAlternarTema');
+  if (temaCheckbox) {
+    const temaSalvo = localStorage.getItem('tema_aluno') || 'dark';
+    document.body.setAttribute('data-bs-theme', temaSalvo);
+    document.documentElement.setAttribute('data-bs-theme', temaSalvo);
+    temaCheckbox.checked = (temaSalvo === 'light');
 
-  // Carregar tema salvo
-  const temaSalvo = localStorage.getItem('tema_aluno') || 'dark';
-  document.body.setAttribute('data-bs-theme', temaSalvo);
+    temaCheckbox.addEventListener('change', () => {
+      if (typeof CYBER_AUDIO !== 'undefined' && CYBER_AUDIO.tocar) {
+        CYBER_AUDIO.tocar('click');
+      }
+      const novo = temaCheckbox.checked ? 'light' : 'dark';
+      document.body.setAttribute('data-bs-theme', novo);
+      document.documentElement.setAttribute('data-bs-theme', novo);
+      localStorage.setItem('tema_aluno', novo);
+    });
+  }
 });

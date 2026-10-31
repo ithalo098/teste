@@ -250,3 +250,104 @@
   height: 100%;
   background: linear-gradient(180deg, #222424 30%, #666666 70%);
 }
+
+
+/* ==============================================================
+   BOTAO DE TEMA CYBER - UIVERSE (Praashoo7/cuddly-bat-26)
+   ============================================================== */
+.theme-switch {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 9.6em;
+  height: 2.5em;
+  font-size: 13px;
+  font-family: var(--font-main, 'Inter', Montserrat, sans-serif);
+  font-weight: 700;
+  color: #000;
+  background-color: #fff;
+  padding: 0.4em 0.7em;
+  border: 1px solid #000;
+  border-radius: 6px;
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 10;
+  position: relative;
+  user-select: none;
+  margin: 0;
+}
+
+.theme-switch .name {
+  display: flex;
+  align-items: center;
+}
+
+.theme-switch .name::before {
+  color: #000;
+  content: "Dark Mode";
+  margin-right: 2.2em;
+  transition: .2s ease-in-out;
+  font-size: 0.85rem;
+  letter-spacing: -0.2px;
+}
+
+.theme-switch .name::after {
+  color: #000;
+  content: "Light Mode";
+  margin-right: 2.2em;
+  transition: .2s ease-in-out;
+  display: none;
+  font-size: 0.85rem;
+  letter-spacing: -0.2px;
+}
+
+.theme-switch .slider {
+  position: absolute;
+  background-color: #222;
+  right: 0.75em;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 3px solid #222;
+  transform: rotate(-120deg);
+  box-shadow: inset 0px 5px #999, inset 0px 5px 1px 1px #999;
+  -moz-box-shadow: inset 0px 5px #999, inset 0px 5px 1px 1px #999;
+  transition: 300ms ease;
+}
+
+.theme-switch:hover {
+  color: #fff;
+  box-shadow: 1px 1px 0px #000;
+  transform: translateX(3px) translateY(3px);
+  background-color: #111;
+  border-color: #fff;
+}
+
+.theme-switch:hover .name::before,
+.theme-switch:hover .name::after {
+  color: #fff;
+}
+
+.theme-switch input[type=checkbox]:checked + .slider {
+  transform: rotate(360deg);
+  box-shadow: none;
+  border: 3px solid #F28C38;
+  background-color: #F28C38;
+}
+
+.theme-switch input[type=checkbox]:checked ~ .name::before {
+  display: none;
+}
+
+.theme-switch input[type=checkbox]:checked ~ .name::after {
+  display: block;
+}
+
+.theme-switch input[type=checkbox] {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
