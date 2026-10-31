@@ -267,22 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Alternador de tema cibernetico (cuddly-bat-26)
-  const temaCheckbox = document.getElementById('btnAlternarTema');
-  if (temaCheckbox) {
-    const temaSalvo = localStorage.getItem('tema_aluno') || 'dark';
-    document.body.setAttribute('data-bs-theme', temaSalvo);
-    document.documentElement.setAttribute('data-bs-theme', temaSalvo);
-    temaCheckbox.checked = (temaSalvo === 'light');
-
-    temaCheckbox.addEventListener('change', () => {
-      if (typeof CYBER_AUDIO !== 'undefined' && CYBER_AUDIO.tocar) {
-        CYBER_AUDIO.tocar('click');
-      }
-      const novo = temaCheckbox.checked ? 'light' : 'dark';
-      document.body.setAttribute('data-bs-theme', novo);
-      document.documentElement.setAttribute('data-bs-theme', novo);
-      localStorage.setItem('tema_aluno', novo);
-    });
-  }
+  // Tema unico cibernetico fixo (Dark Mode permanente)
+  document.documentElement.setAttribute('data-bs-theme', 'dark');
+  document.body.setAttribute('data-bs-theme', 'dark');
+  localStorage.setItem('tema_aluno', 'dark');
 });
