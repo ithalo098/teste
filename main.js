@@ -1,19 +1,19 @@
 // Processo principal do Electron (main.js)
 // Responsavel por criar a janela nativa do sistema operacional
-const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, Menu, dialog } = require('electron');
 const path = require('path');
 
 let janelaPrincipal = null;
 
-// Funcao que cria a janela do app
 function criarJanela() {
   janelaPrincipal = new BrowserWindow({
-    width: 1100,
-    height: 750,
+    width: 1200,
+    height: 800,
     minWidth: 850,
     minHeight: 600,
-    title: 'Minhas Tarefas Desktop',
-    backgroundColor: '#f8f9fa',
+    title: 'NEXUS TAREFAS AI - Grau Técnico Desktop',
+    backgroundColor: '#07070a',
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -21,15 +21,12 @@ function criarJanela() {
     }
   });
 
-  // Carrega o arquivo HTML principal
-  janelaPrincipal.loadFile('index.html');
+  janelaPrincipal.loadFile(path.join(__dirname, 'index.html'));
 
-  // Trata o evento de quando a janela e fechada
   janelaPrincipal.on('closed', () => {
     janelaPrincipal = null;
   });
 
-  // Menu customizado para o aplicativo
   const templateMenu = [
     {
       label: 'Arquivo',
@@ -39,6 +36,13 @@ function criarJanela() {
           accelerator: 'CmdOrCtrl+R',
           click: () => {
             if (janelaPrincipal) janelaPrincipal.reload();
+          }
+        },
+        {
+          label: 'Ferramentas de Desenvolvedor (F12)',
+          accelerator: 'F12',
+          click: () => {
+            if (janelaPrincipal) janelaPrincipal.webContents.toggleDevTools();
           }
         },
         { type: 'separator' },
@@ -69,9 +73,9 @@ function criarJanela() {
           click: () => {
             dialog.showMessageBox(janelaPrincipal, {
               type: 'info',
-              title: 'Sobre o TaskMaster',
-              message: 'Minhas Tarefas Desktop',
-              detail: 'Trabalho pratico desenvolvido por ithalo098 e trio na disciplina de Desenvolvimento Desktop.'
+              title: 'Sobre o Nexus Tarefas AI',
+              message: 'NEXUS TAREFAS AI - Edição Desktop',
+              detail: 'Desenvolvido para Grau Técnico por ithalo098.\nInterface Futurista 100% Offline e Portátil.'
             });
           }
         }
@@ -83,7 +87,6 @@ function criarJanela() {
   Menu.setApplicationMenu(menu);
 }
 
-// Inicializacao quando o Electron estiver pronto
 app.whenReady().then(() => {
   criarJanela();
 
@@ -94,7 +97,6 @@ app.whenReady().then(() => {
   });
 });
 
-// Encerra quando todas as janelas forem fechadas no Windows
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
