@@ -4,7 +4,8 @@
   "description": "Trabalho de Desenvolvimento Desktop - Lista de Tarefas com Electron e Bootstrap",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "serve": "node server.js"
   },
   "author": "ithalo098",
   "license": "ISC",
